@@ -17,7 +17,6 @@ function slideScreenEquipe() {
     }, 200);
 };
 
-
 //CV equipe
 
 const person_card = document.querySelectorAll(".person_card");
@@ -25,16 +24,11 @@ const person_card = document.querySelectorAll(".person_card");
 person_card.forEach((card, i) => {
     card.addEventListener("click", () => {
         let person_card_CV = document.getElementById(`person_card_CV_${i}`);
-        let block_person_card = document.getElementById(`block_person_card_${i}`)
-        let person_card_text = document.getElementById(`person_card_text_${i}`)
-        block_person_card.classList.toggle("block_person_card_active")
+        let block_person_card = document.getElementById(`block_person_card_${i}`);
+        let person_card_text = document.getElementById(`person_card_text_${i}`);
+        block_person_card.classList.toggle("block_person_card_active");
         person_card_CV.classList.toggle("hidden_element");
         person_card_text.classList.toggle("hidden_element");
-        /* block_person_card.addEventListener("mouseout", () => {
-            block_person_card.classList.toggle("block_person_card_active")
-            person_card_CV.classList.toggle("hidden_element");
-            person_card_text.classList.toggle("hidden_element");
-        }); */
     });
 });
 

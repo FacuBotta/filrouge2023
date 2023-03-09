@@ -72,10 +72,10 @@ header .logo {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 100vw;
+    width: 100vw;
     min-height: 100vh;
     margin-bottom: -150px;
-    padding-top: 6.35rem;
+    padding-top: 6.20rem;
 }
 
 .container_all h2 {
@@ -94,6 +94,10 @@ header .logo {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.element_active {
+    color: var(--text-color)!important;
 }
 
 /* <<<< MENU BURGUER >>>> */
@@ -261,7 +265,6 @@ video {
     left: 10vw;
     top: 20vh;
     z-index: 6000;
-    background-color: #A83CBA;
     display: flex;
     flex-direction: row;
 }
@@ -275,7 +278,7 @@ video {
     padding: 10px;
     background-color:rgba(0, 0, 0, 0.959);
     border-radius: 0 1rem 1rem 0;
-    animation: CV_card_animation .3s cubic-bezier(0.39, 1.03, 0.52, 1.45);
+    animation: CV_card_animation .2s cubic-bezier(0.39, 1.03, 0.52, 1.45);
 }
 
 @keyframes CV_cerd_animation_break {
@@ -410,6 +413,7 @@ video {
         background-color: #898989a8;
         font-size: 150px;
         color: white;
+        cursor: pointer;
 }
 
 .new_spectacle{
@@ -425,7 +429,7 @@ video {
     cursor: pointer;
 }
 
-.spectacle_container {
+.spectacle_container_modal {
     position: absolute;
     top: 0;
     padding-top: 5rem;
@@ -455,28 +459,23 @@ video {
     overflow: hidden;
 }
 
-.spectacle_container .slider_container .slider {
+.spectacle_container_modal .slider_container .slider {
     display: flex;
     flex-wrap: nowrap;
     font-size: 1.3rem;
     text-align: center;
-    /* background-color: aquamarine; */
 }
 
-.spectacle_container .slider .slide {
-    padding: 1rem 1rem 0 1rem;
+.spectacle_container_modal .slider .slide {
+    padding: 1rem;
     min-width: 100%;
     min-height: 100vh;
     z-index: 6000;
 }
 
-.spectacle_video {
-    background-color: #99dc2e;
-}
-
-.spectacle_description {
-    background-color: burlywood;
-    min-height: 100vh;
+.slide_hidden {
+    overflow: hidden;
+    max-height: 0vh;
 }
 
 .container_images_spectacle {
@@ -486,7 +485,6 @@ video {
     width: 90vw;
     margin: auto;
     min-height: 100vh;
-    background-color: #A83CBA;
 }
 
 .p_comentaire_spectacle {
@@ -513,6 +511,11 @@ video {
     height: 100%;
 }
 
+.spectacle_video iframe {
+    width: 90%;
+    height: 90%;
+}
+
 /* <<<<<< CONTACT >>>>>> */
 
 @keyframes animation_form_contact {
@@ -534,9 +537,10 @@ video {
 
 .btn_contact {
     color: var(--text-color);
-    background: none;
-    border: none;
     font-family: var(--secondary-font);
+    margin-top: -1.5rem;
+    /* background: none; */
+    /* border: none; */
     font-size: 2.5rem;
 }
 
@@ -558,8 +562,10 @@ video {
 }
 
 .container_form_contact form {
+    /* background-color: #99dc2e; */
     padding: 1rem;
-    width: 25rem;
+    width: 30rem;
+    /* height: 70vh; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -621,15 +627,24 @@ footer {
     width: 100vw;
     height: 50%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: left;
     align-items: end;
     padding-bottom: 10px;
     font-size: .9em;
 }
 
-footer a {
-    margin-left: 30px;
+footer .footer_links a {
+    margin-left: 1.2rem;
     text-align: bottom;
+}
+
+footer .social_icons {
+    margin-left: 10px;
+    margin-bottom: -5PX;
+}
+footer .social_icons img {
+    width: 1.5rem;
 }
 
 @media screen and  (max-width: 850px) {
