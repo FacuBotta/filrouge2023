@@ -33,7 +33,7 @@ a:hover {
 header {
     font-family: var(--secondary-font);
     background: linear-gradient(black 50%, rgba(0, 0, 0, 0.496), rgba(0, 0, 0, 0) );
-    z-index: 6000;
+    z-index: 4000;
     width: 100vw;
     height: 7rem;
     position: absolute;
@@ -94,10 +94,47 @@ header .logo {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    text-align: center;
 }
 
 .element_active {
     color: var(--text-color)!important;
+}
+
+.container_modal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 5000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: all .6s ease-out;
+    visibility: hidden;
+    opacity: 0;
+}
+.btn_close {
+    position: absolute;
+    top: 13%;
+    right: 2%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 2px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .8s;
+}
+.btn_close:nth-child(1):hover {
+    color: var(--active-color);
+    transform: rotate(180deg);
 }
 
 /* <<<< MENU BURGUER >>>> */
@@ -108,7 +145,7 @@ header .logo {
     position: absolute;
     cursor: pointer;
     right: 2%;
-    top: 30%;
+    top: 27%;
 }
 
 .bars_menu span {
@@ -131,6 +168,29 @@ header .logo {
     transform: rotate(-60deg) translate(30px, -2px);
 }
 
+.hidden_menu_items {
+    margin-right: -100%;
+}
+
+.active_menu_item_0 {
+    animation: animation_item_menu .6s  cubic-bezier(0.39, 1.03, 0.52, 1.45);
+}
+.active_menu_item_1 {
+    animation: animation_item_menu .5s  cubic-bezier(0.39, 1.03, 0.52, 1.45);
+}
+.active_menu_item_2 {
+    animation: animation_item_menu .6s  cubic-bezier(0.39, 1.03, 0.52, 1.45);
+}
+.active_menu_item_3 {
+    animation: animation_item_menu .4s  cubic-bezier(0.39, 1.03, 0.52, 1.45);
+}
+.active_menu_item_4 {
+    animation: animation_item_menu .5s  cubic-bezier(0.39, 1.03, 0.52, 1.45);
+}
+.active_menu_item_5 {
+    animation: animation_item_menu .4s  cubic-bezier(0.39, 1.03, 0.52, 1.45);
+}
+
 @keyframes animation_item_menu {
     0%, 100% {
         transform: translateX(0px);
@@ -143,34 +203,6 @@ header .logo {
     }
 }
 
-.active_menu_item_0 {
-    animation: animation_item_menu .6s  cubic-bezier(0.39, 1.03, 0.52, 1.45)
-}
-.active_menu_item_1 {
-    animation: animation_item_menu .5s  cubic-bezier(0.39, 1.03, 0.52, 1.45)
-}
-.active_menu_item_2 {
-    animation: animation_item_menu .6s  cubic-bezier(0.39, 1.03, 0.52, 1.45)
-}
-.active_menu_item_3 {
-    animation: animation_item_menu .4s  cubic-bezier(0.39, 1.03, 0.52, 1.45)
-}
-.active_menu_item_4 {
-    animation: animation_item_menu .5s  cubic-bezier(0.39, 1.03, 0.52, 1.45)
-}
-.active_menu_item_5 {
-    animation: animation_item_menu .4s  cubic-bezier(0.39, 1.03, 0.52, 1.45)
-}
-
-.hidden_menu_items {
-    margin-right: -100%;
-}
-
-nav {
-    transition: all .1s;
-    transform-origin: right;
-}
-
 .hidden_nav_menu {
     overflow: hidden;
     transform: scaleX(0);
@@ -179,7 +211,12 @@ nav {
 .active_nav_menu {
     height: 100%;
     margin-right: 1rem;
-    overflow: hidden;
+    overflow: visible;
+}
+
+nav {
+    transition: all .1s;
+    transform-origin: right;
 }
 
 nav ul {
@@ -219,7 +256,7 @@ video {
     justify-content: space-evenly;
     min-height: 100vh;
     position: absolute;
-    transition: all 300ms;
+    transition: all .6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 5000;
 }
 
@@ -234,7 +271,7 @@ video {
 
 .person_card {
     width: 11rem;
-    height: 16rem;
+    height: 20rem;
     margin: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
@@ -290,7 +327,6 @@ video {
         top: 95%;
     }
 }
-
 @keyframes CV_card_animation {
     0% {
         left: 0;
@@ -442,7 +478,7 @@ video {
     font-family: var(--secondary-font);
     margin: .25rem;
     color: var(--back-text-color);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
 }
 
@@ -481,7 +517,7 @@ video {
     justify-content: center;
     width: 90vw;
     margin: auto;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 .p_comentaire_spectacle {
@@ -497,10 +533,12 @@ video {
     margin: 1rem;
     transition: all .6s;
     cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .img_spectacle:hover {
-    scale: 1.1;
+    filter: grayscale(0);
+    scale: 1.05;
 }
 
 .img_spectacle img {
@@ -511,6 +549,55 @@ video {
 .spectacle_video iframe {
     width: 90%;
     height: 90%;
+}
+/* << CARROUSEL MODAL >> */
+
+.slide_modal {
+    background-color: #000000;
+    color: black;
+    width: 100%;
+    height: 80%;
+    position: relative;
+    top: 7%;
+    /* z-index: 5000; */
+    display: flex;
+    justify-content: center;
+}
+
+.slide_modal_image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    position: relative;
+}
+
+.btn_slide_modal {
+    width: 100px;
+    height: 100%;
+    padding: 0 10px;
+    color: var(--text-color);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.btn_slide_modal > i {
+    cursor: pointer;
+    transition: all .3s;
+}
+.btn_slide_modal > i:hover {
+    scale: 1.2;
+    color: var(--active-color);
+}
+.btn_prev {
+    background: linear-gradient(to right, black, rgba(0, 0, 0, 0));
+    justify-content: left;
+    left: 0;
+}
+.btn_next {
+    background: linear-gradient(to left, black, rgba(0, 0, 0, 0));
+    justify-content: right;
+    right: 0;
 }
 
 /* <<<<<< CONTACT >>>>>> */
@@ -536,8 +623,6 @@ video {
     color: var(--text-color);
     font-family: var(--secondary-font);
     margin-top: -1.5rem;
-    /* background: none; */
-    /* border: none; */
     font-size: 2.5rem;
 }
 
@@ -559,10 +644,8 @@ video {
 }
 
 .container_form_contact form {
-    /* background-color: #99dc2e; */
     padding: 1rem;
     width: 30rem;
-    /* height: 70vh; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -601,12 +684,13 @@ video {
 
 .container_form_contact input, .container_form_contact textarea, .container_form_contact button {
     padding: 12px;
-    margin-bottom: 1em;
-    background-color: rgba(0, 0, 0, 0.774);
+    margin-bottom: .7em;
+    background-color: rgba(0, 0, 0, 0.8);
     border: solid 2px white;
     color: white;
     font-family: var(--primary-font);
-    transition: all .3s ease
+    font-size: 1.2rem;
+    transition: all .3s ease;
 }
 
 /* <<<< FOOTER >>>> */
@@ -646,9 +730,9 @@ footer .social_icons img {
 
 @media screen and  (max-width: 992px) {
 
-    html, body {
+    /*   html, body {
         font-size: 17px;
-    }
+    } */
 
     .block_person_card_active {
         flex-direction: column;
@@ -666,7 +750,6 @@ footer .social_icons img {
         margin-right: 0;
         overflow: visible;
     }
-
     nav ul {
         background: linear-gradient(to right, rgba(0, 0, 0, 0), black);
         height: fit-content;
@@ -677,7 +760,6 @@ footer .social_icons img {
         right: 0;
         padding-top: 10px;
     }
-
     nav ul li {
         text-align: right;
         padding-right: 10px;
@@ -700,8 +782,53 @@ footer .social_icons img {
 }
 
 @media screen and  (max-width: 500px) {
-    html, body {
+    /* html, body {
         font-size: 14px;
+    } */
+    /* <<< PECTACLES >>> */
+
+    .btns_slide_spectacles a {
+        font-size: 1.35rem;
+    }
+
+    .img_spectacle:hover {
+        scale: 1;
+    }
+
+    .spectacle_container_modal .slider .slide {
+        padding-left: 0;
+        min-width: 100%;
+        min-height: 80vh;
+        z-index: 4000;
+    }
+
+    .container_images_spectacle {
+        min-height: fit-content;
+        width: 100vw;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        overflow-x: scroll;
+        justify-content: left;
+        border: solid 2px black;
+    }
+
+    .img_spectacle {
+        margin: 0;
+        min-width: 100%;
+        min-height: 80vh;
+        margin-right: 10px;
+        filter: grayscale(0);
+    }
+
+    .img_spectacle img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .container_slide > p {
+        margin: 0 10px;
+        text-align: justify;
     }
 
     .container_all .logo {
