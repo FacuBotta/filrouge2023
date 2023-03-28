@@ -1,22 +1,22 @@
 let images = [
-    { img: '/SRL/escurial1.jpg' },
-    { img: '/SRL/escurial2.jpg' },
-    { img: '/SRL/escurial3.jpg' },
-    { img: '/SRL/escurial4.jpg' },
-    { img: '/SRL/escurial5.jpg' },
-    { img: '/SRL/escurial6.jpg' },
-    { img: '/SRL/escurial7.jpg' },
-    { img: '/SRL/escurial8.jpg' },
-    { img: '/SRL/escurial9.jpg' },
-    { img: '/SRL/escurial10.jpg' },
-    { img: '/SRL/escurial11.jpg' },
-    { img: '/SRL/escurial12.jpg' },
-    { img: '/SRL/escurial13.jpg' }
+    { img: '/SRL/photos/escurial1.jpg' },
+    { img: '/SRL/photos/escurial2.jpg' },
+    { img: '/SRL/photos/escurial3.jpg' },
+    { img: '/SRL/photos/escurial4.jpg' },
+    { img: '/SRL/photos/escurial5.jpg' },
+    { img: '/SRL/photos/escurial6.jpg' },
+    { img: '/SRL/photos/escurial7.jpg' },
+    { img: '/SRL/photos/escurial8.jpg' },
+    { img: '/SRL/photos/escurial9.jpg' },
+    { img: '/SRL/photos/escurial10.jpg' },
+    { img: '/SRL/photos/escurial11.jpg' },
+    { img: '/SRL/photos/escurial12.jpg' },
+    { img: '/SRL/photos/escurial13.jpg' }
 ];
 
 let imagesAdder = (tab) => {
     const container_images = document.getElementById("container_images");
-    tab.forEach(( item, i) => {
+    tab.forEach((item, i) => {
         const image_box = container_images.appendChild(document.createElement("div"));
         image_box.setAttribute("class", "img_spectacle");
         image_box.setAttribute("id", `img_spectacle_${i}`); //tal vez no sea necesario el ID.
@@ -90,10 +90,10 @@ btn_spectacle.forEach((card, i) => {
 /* <<< slide modal >>> */
 
 let count = 0;
-const container_slide_modal = document.querySelector('.container_modal'); // overlay (fonde del modal)
-const slide_modal = document.querySelector('.slide_modal'); // contenedor (slide show)
-const images_spectacle = document.querySelectorAll('.container_images_spectacle .img_spectacle img'); //graleria de imagenes lista de nodos
-const img_slide_show = document.querySelector('.slide_modal img'); //imagen a mostrar
+const container_slide_modal = document.querySelector('.container_modal');
+const slide_modal = document.querySelector('.slide_modal');
+const images_spectacle = document.querySelectorAll('.container_images_spectacle .img_spectacle img');
+const img_slide_show = document.querySelector('.slide_modal img');
 
 slide_modal.addEventListener('click', (e) => {
     let btn_prev = document.getElementById('btn_prev'),
@@ -121,29 +121,57 @@ slide_modal.addEventListener('click', (e) => {
 
 Array.from(images_spectacle).forEach((img, i) => {
     img.addEventListener('click', () => {
-        if (slider_container.offsetWidth > 500) {
+        if (slider_container.offsetWidth > 576) {
             const image_selected = i;
             img_slide_show.src = images[image_selected].img;
             count = image_selected;
             container_slide_modal.style.opacity = 1;
-            container_slide_modal.style.visibility = 'visible'
-        } /* else {
-            let container_images = document.querySelector('.container_images_spectacle');
-            let pos_start = 0;
-            let pos_end = 0;
-            container_images.addEventListener('touchstart', e => {
-                pos_start = e.touches[0].clientX;
-                console.log(pos_start);
-            });
-            container_images.addEventListener('touchend', e => {
-                pos_end = e.touches[0].clientX;
-                console.log(pos_end);
+            container_slide_modal.style.visibility = 'visible';
+        } else if (slider_container.offsetWidth <= 576) {
+            const image_selected = i;
+            img_slide_show.src = images[image_selected].img;
+            count = image_selected;
+            container_slide_modal.style.opacity = 1;
+            container_slide_modal.style.visibility = 'visible';
+            // detect touch events
+            let touchstartX = 0,
+                touchendX = 0;
+
+            slide_modal.addEventListener('touchstart', (e) => {
+                touchstartX = e.changedTouches[0].screenX;
             });
 
-        }; */
+            slide_modal.addEventListener('touchend', (e) => {
+                touchendX = e.changedTouches[0].screenX;
+                handleGesture();
+            });
+
+            function handleGesture() {
+                if (touchendX < touchstartX) {
+                    // slide left, move to next image
+                    if (count < images.length - 1) {
+                        img_slide_show.src = images[count + 1].img;
+                        count++;
+                    } else {
+                        img_slide_show.src = images[0].img;
+                        count = 0;
+                    }
+                }
+
+                if (touchendX > touchstartX) {
+                    // slide right, move to previous image
+                    if (count > 0) {
+                        img_slide_show.src = images[count - 1].img;
+                        count--;
+                    } else {
+                        img_slide_show.src = images[images.length - 1].img;
+                        count = images.length - 1;
+                    };
+                };
+            };
+        };
     });
 });
-
 document.querySelector('.btn_close').addEventListener('click', () => {
     container_slide_modal.style.opacity = 0;
     container_slide_modal.style.visibility = 'hidden'

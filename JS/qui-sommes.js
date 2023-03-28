@@ -19,7 +19,7 @@ function slideScreenEquipe() {
 
 //CV equipe
 
-const person_card = document.querySelectorAll(".person_card");
+const person_card = document.querySelectorAll(".person_card div .person_card_image");
 
 person_card.forEach((card, i) => {
     card.addEventListener("click", () => {
@@ -29,6 +29,14 @@ person_card.forEach((card, i) => {
         block_person_card.classList.toggle("block_person_card_active");
         person_card_CV.classList.toggle("hidden_element");
         person_card_text.classList.toggle("hidden_element");
+
+        document.onclick = (e) => {
+            console.log(e.target.classList);
+            /* if (person_card.classList.contains(e.target)) {
+                block_person_card.classList.toggle("block_person_card_active");
+                person_card_CV.classList.toggle("hidden_element");
+                person_card_text.classList.toggle("hidden_element");
+            }; */
+        };
     });
 });
-

@@ -65,7 +65,7 @@ header .logo {
 /* <<<<< MAIN'S CLASSES >>>>> */
 
 .hidden_element {
-    display: none;
+    display: none!important;
 }
 
 .container_all {
@@ -119,7 +119,7 @@ header .logo {
 }
 .btn_close {
     position: absolute;
-    top: 13%;
+    top: 5%;
     right: 2%;
     width: 30px;
     height: 30px;
@@ -131,6 +131,7 @@ header .logo {
     align-items: center;
     cursor: pointer;
     transition: all .8s;
+    z-index: 6000;
 }
 .btn_close:nth-child(1):hover {
     color: var(--active-color);
@@ -231,6 +232,57 @@ nav ul li {
     width: max-content;
 }
 
+/* <<<< ADMIN >>>> */
+
+.admin_body {
+    background-color: #6F6F6F;
+    text-align: center;
+}
+.admin_item {
+    width: 100px;
+    height: 100px;
+    border: solid 3px #000000;
+    margin: 10px;
+}
+.add_item {
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    font-size: 70px;
+    transition: all .3s;
+}
+
+.add_item:hover {
+    background-color: #ffffff7f;
+    scale: 1.1;
+    color: white;
+}
+
+.admin_form {
+    background-color: #fff;
+    color: #000000;
+    min-height: 100vh;
+    width: 90%;
+    padding: 20px 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin_form form {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-around;
+}
+.admin_form form input,
+.admin_form form textarea {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+}
 
 /* <<<< ACCEUIL >>>> */
 
@@ -248,16 +300,16 @@ video {
 
 .container_slide {
     background-color: rgba(0, 0, 0, 0.989);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.509), rgba(0, 0, 0, 1)) , url(../SRL/fond-slide-qui-sommes.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.509), rgba(0, 0, 0, 1)) , url(../SRL/fonds/fond-slide-qui-sommes.jpg);
     background-repeat: no-repeat;
     background-size: 60%;
     background-position-y: 50%;
     text-align: center;
     justify-content: space-evenly;
-    min-height: 100vh;
+    height: 100vh;
     position: absolute;
     transition: all .6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 5000;
+    z-index: 3000;
 }
 
 .container_slide > p {
@@ -373,26 +425,6 @@ video {
 
 /*<<<< AGENDA >>>>*/
 
-.add_event_card {
-    width: 280px;
-    height: 400px;
-    margin:  30px 30px;
-    background-color: #8989897e;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 100px;
-    color: rgba(255, 255, 255, 0.579);
-    transition: all 300ms;
-}
-
-.add_event_card:hover {
-    background-color: #898989a8;
-    font-size: 150px;
-    color: white;
-}
-
 .new_event{
     width: 280px;
     height: 400px;
@@ -469,7 +501,7 @@ video {
     width: 100vw;
     min-height: 100vh;
     overflow-y: scroll;
-    background-image: url(../SRL/spectacles-fond.jpg);
+    background-image: url(../SRL/fonds/spectacles-fond.jpg);
     text-align: center;
 }
 
@@ -558,18 +590,18 @@ video {
     width: 100%;
     height: 80%;
     position: relative;
-    top: 7%;
+    top: 0;
     /* z-index: 5000; */
     display: flex;
     justify-content: center;
 }
 
-.slide_modal_image {
+/* .slide_modal_image {
     height: 100%;
     width: 100%;
     object-fit: contain;
     position: relative;
-}
+} */
 
 .btn_slide_modal {
     width: 100px;
@@ -667,7 +699,6 @@ video {
 .checkbox {
     cursor: pointer;
     background-color: #fff;
-    background-image: url(../SRL/check_icon.svg);
     margin: .8rem .7rem .3rem 0;
     appearance: none;
     border: 1px solid var(--text-color);
@@ -781,11 +812,32 @@ footer .social_icons img {
     }
 }
 
-@media screen and  (max-width: 500px) {
+@media screen and  (max-width: 576px) {
     /* html, body {
         font-size: 14px;
     } */
     /* <<< PECTACLES >>> */
+    .slide_modal {
+        height: 100%;
+    }
+    #slide_modal_image {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+        /* object-fit: cover; *//* ver con les chiques */
+    }
+    .btn_close {
+        top: 2%;
+        right: 2%;
+        width: 20px;
+        height: 20px;
+        padding: 2px;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 6000;
+    }
+    .btn_slide_modal {
+        display: none;
+    }
 
     .btns_slide_spectacles a {
         font-size: 1.35rem;
@@ -802,22 +854,10 @@ footer .social_icons img {
         z-index: 4000;
     }
 
-    .container_images_spectacle {
-        min-height: fit-content;
-        width: 100vw;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        overflow-x: scroll;
-        justify-content: left;
-        border: solid 2px black;
-    }
-
     .img_spectacle {
-        margin: 0;
-        min-width: 100%;
-        min-height: 80vh;
-        margin-right: 10px;
-        filter: grayscale(0);
+        margin: 5px;
+        width: 10rem;
+        height: 10rem;
     }
 
     .img_spectacle img {
