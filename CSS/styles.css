@@ -107,7 +107,7 @@ header .logo {
     right: 0;
     top: 0;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     z-index: 5000;
     display: flex;
     justify-content: center;
@@ -243,6 +243,8 @@ nav ul li {
     height: 100px;
     border: solid 3px #000000;
     margin: 10px;
+    background-position: center center;
+    background-size: cover;
 }
 .add_item {
     background-color: #ffffff;
@@ -250,11 +252,13 @@ nav ul li {
     cursor: pointer;
     display: flex;
     justify-content: center;
-    align-items: end;
-    font-size: 70px;
+    align-items: center;
     transition: all .3s;
+    position: relative;
 }
-
+.add_item span {
+    font-size: 40px;
+}
 .add_item:hover {
     background-color: #ffffff7f;
     scale: 1.1;
@@ -262,15 +266,15 @@ nav ul li {
 }
 
 .admin_form {
-    background-color: #fff;
+    background-color: #ffffff;
     color: #000000;
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: scroll;
     width: 90%;
     padding: 20px 100px;
     display: flex;
     flex-direction: column;
 }
-
 .admin_form form {
     display: flex;
     flex-direction: row;
@@ -283,7 +287,47 @@ nav ul li {
     padding: 5px;
     margin: 5px 0;
 }
-
+.form_delete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 30%;
+    height: 200px;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+}
+.hidden_div {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: relative;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .6s;
+}
+.hidden_div div {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+.hidden_div div > span {
+    cursor: pointer;
+    transition: all .3s;
+}
+.hidden_div div > span:hover {
+    color: var(--active-color);
+    scale: 1.3;
+}
 /* <<<< ACCEUIL >>>> */
 
 video {
@@ -306,7 +350,7 @@ video {
     background-position-y: 50%;
     text-align: center;
     justify-content: space-evenly;
-    height: 100vh;
+    min-height: 100vh;
     position: absolute;
     transition: all .6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 3000;
@@ -342,6 +386,7 @@ video {
     background-size: cover;
     background-position: center center;
     z-index: 5000;
+    cursor: pointer;
 }
 
 .block_person_card_active {
@@ -458,6 +503,10 @@ video {
     bottom: 2%;
     right: 32%;
 }
+.btn_event_card:hover {
+    outline: solid 2px var(--active-color);
+    background-color: var(--text-color);
+}
 
 /* <<<< SPECTACLES >>>> */
 
@@ -537,6 +586,10 @@ video {
     min-height: 100vh;
     z-index: 4000;
 }
+.spectacle_container_modal h1 {
+    position: relative;
+    z-index: 4000;
+}
 
 .slide_hidden {
     overflow: hidden;
@@ -588,8 +641,8 @@ video {
     background-color: #000000;
     color: black;
     width: 100%;
-    height: 80%;
-    position: relative;
+    height: 100%;
+    position: fixed;
     top: 0;
     /* z-index: 5000; */
     display: flex;
@@ -656,6 +709,7 @@ video {
     font-family: var(--secondary-font);
     margin-top: -1.5rem;
     font-size: 2.5rem;
+    z-index: 5000;
 }
 
 .hidden_form {
@@ -856,8 +910,8 @@ footer .social_icons img {
 
     .img_spectacle {
         margin: 5px;
-        width: 10rem;
-        height: 10rem;
+        width: 8rem;
+        height: 8rem;
     }
 
     .img_spectacle img {

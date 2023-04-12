@@ -5,42 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/styles.css">
+    <link rel="stylesheet" href="../../CSS/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,700,1,0" />
     <title>Acquaforte Spectacles</title>
 </head>
 
 <body>
-    
-    <header>
-        <div class="container_header">
-            <div class="logo">
-                <a href="index.html"><img src="./SRL/icons/logo.png" alt=""></a>
-            </div>
-            <nav id="nav_menu" class="hidden_nav_menu">
-                <ul>
-                    <li class="hidden_menu_items"><a href="la-compagnie.html">LA COMPAGNIE</a></li>
-                    <li class="hidden_menu_items"><a href="spectacles.html">SPECTACLES</a></li>
-                    <li class="hidden_menu_items"><a href="agenda.html">AGENDA</a></li>
-                    <li class="hidden_menu_items"><a href="#">FAIRE UN DON</a></li>
-                    <li class="hidden_menu_items"><a href="contact.html">CONTACT</a></li>
-                    <!-- <li class="hidden_menu_items"><a href="action-culturelle.html">ACTION CULTURELE</a></li> -->
-                    <!-- <li class="hidden_menu_items"><a href="formations.html">FORMATIONS</a></li> -->
-                </ul>
-            </nav>
-        </div>
-        <div class="bars_menu" id="bars_menu">
-            <span class="line1_bars_menu"></span>
-            <span class="line2_bars_menu"></span>
-            <span class="line3_bars_menu"></span>
-        </div>
-        </div>
-    </header>
-    <div class="container_all container_all_image" style="background-image: url(./SRL/fonds/spectacles-fond.jpg);">
-        <img class="logo" src="./SRL/logo/logo-white.png">
+    <?php
+        include_once('../models/header.php')
+    ?>
+    <div class="container_all container_all_image" style="background-image: url(../../SRL/fonds/spectacles-fond.jpg);">
+        <img class="logo" src="../../SRL/logo/logo-white.png">
         <h2 id="spectacles_titre">Spectacles</h2>
         <div id="container_spectacle_cards" class="container_cards">
-            <div class="new_spectacle" style="background-image: url(./SRL/afiches/afiche-escurial.png)">
+            <div class="new_spectacle" style="background-image: url(../../SRL/afiches/afiche-escurial.png)">
             </div>
         </div>
     </div>
@@ -51,8 +29,8 @@
                 <a id="btn_description_spectacle">Description</a>
                 <a id="btn_photos_spectacle">Photos</a>
                 <a id="btn_videos_specetacle">Videos</a>
-                <a id="btn_contact_specetacle" href="./contact.html">Contact</a>
-                <a id="btn_retour_specetacle" href="./spectacles.html">Retour</a>
+                <a id="btn_contact_specetacle" href="./contact.php">Contact</a>
+                <a id="btn_retour_specetacle" href="./spectacles.php">Retour</a>
             </div>
         </div>
         <div id="slider_container" class="slider_container">
@@ -97,29 +75,18 @@
                     </div>
                 </div>
                 <div id="spectacle_video" class="slide spectacle_video slide_hidden">
-                    <!-- <iframe src="https://www.youtube.com/embed/V_Y0fQHhve8" title="YouTube video player" frameborder="0"
+                    <iframe src="https://www.youtube.com/embed/V_Y0fQHhve8" title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe> -->
+                        allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="footer_spectacles">
-        <div class="footer_content">
-            <div class="social_icons">
-                <a href="#" target="_blank"><img src="./SRL/icons/icon-facebook.svg" alt="facebook-link"></a>
-                <a href="#" target="_blank"><img src="./SRL/icons/icon-instagram.svg" alt="instagram-link"></a>
-                <a href="https://www.youtube.com/@acquafortetheatre760/featured" target="_blank"><img
-                        src="./SRL/icons/icon-youtube.svg" alt="youtube-link"></a>
-            </div>
-            <div class="footer_links">
-                <a href="index.html">ACCUEIL</a>
-                <a href="#">FAIRE UN DON</a>
-            </div>
-        </div>
-    </footer>
-    <script src="./JS/main.js"></script>
-    <script src="./JS/spectacles.js"></script>
+    <?php
+        include_once('../models/footer.php');
+    ?>
+    <script src="../../JS/main.js"></script>
+    <script src="../../JS/spectacles.js"></script>
 </body>
 
 </html>

@@ -1,17 +1,17 @@
 let images = [
-    { img: '/SRL/photos/escurial1.jpg' },
-    { img: '/SRL/photos/escurial2.jpg' },
-    { img: '/SRL/photos/escurial3.jpg' },
-    { img: '/SRL/photos/escurial4.jpg' },
-    { img: '/SRL/photos/escurial5.jpg' },
-    { img: '/SRL/photos/escurial6.jpg' },
-    { img: '/SRL/photos/escurial7.jpg' },
-    { img: '/SRL/photos/escurial8.jpg' },
-    { img: '/SRL/photos/escurial9.jpg' },
-    { img: '/SRL/photos/escurial10.jpg' },
-    { img: '/SRL/photos/escurial11.jpg' },
-    { img: '/SRL/photos/escurial12.jpg' },
-    { img: '/SRL/photos/escurial13.jpg' }
+    { img: '../../SRL/photos/escurial1.jpg' },
+    { img: '../../SRL/photos/escurial2.jpg' },
+    { img: '../../SRL/photos/escurial3.jpg' },
+    { img: '../../SRL/photos/escurial4.jpg' },
+    { img: '../../SRL/photos/escurial5.jpg' },
+    { img: '../../SRL/photos/escurial6.jpg' },
+    { img: '../../SRL/photos/escurial7.jpg' },
+    { img: '../../SRL/photos/escurial8.jpg' },
+    { img: '../../SRL/photos/escurial9.jpg' },
+    { img: '../../SRL/photos/escurial10.jpg' },
+    { img: '../../SRL/photos/escurial11.jpg' },
+    { img: '../../SRL/photos/escurial12.jpg' },
+    { img: '../../SRL/photos/escurial13.jpg' }
 ];
 
 let imagesAdder = (tab) => {
