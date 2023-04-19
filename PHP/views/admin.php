@@ -11,6 +11,7 @@
     <title>Admin page</title>
 </head>
 
+<!-- DELETE FORM -->
 <body class="admin_body">
     <div id="modal_delete" class="container_modal">
         <div class="form_delete">
@@ -18,6 +19,7 @@
             <button id="btn_close_delete">Annuler</button>
             <form action="../Controllers/equipe.php" method="POST">
                 <input type="hidden" name="form_delete" value="1">
+                <input id="form_delete_file" type="hidden" name="file_membre">
                 <input id="form_delete" type="hidden" name="id_membre">
                 <button type="submit">Supprimer</button>
             </form>
@@ -102,7 +104,9 @@
                     <input id="nom_membre" type="text" name="nom_membre"><br>
                     <input id="prenom_membre" type="text" name="prenom_membre"><br>
                     <label for="new_image_membre">Photo:</label>
-                    <input type="file" name="new_image_membre"><br>
+                    <!-- Seting old image like default from JS in case of not new image to membre -->
+                    <input id="old_image_membre" type="hidden" name="old_image_membre"><br>
+                    <input type="file" name="new_image_membre" ><br>
                     <input id="vignette_membre" type="textarea" name="vignette_membre"><br>
                     <input id="description_membre" type="text" name="description_membre"><br>
                     <input id="vignette_membre_esp" type="text" name="vignette_membre_esp"><br>

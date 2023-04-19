@@ -52,6 +52,7 @@ fetch("../../PHP/Controllers/equipe.php", {
         getData(data);
     });
 function getData(membres) {
+
     membres.forEach(membre => {
         const membre_box = container_membres.appendChild(document.createElement('div'));
         membre_box.setAttribute('class', 'admin_item');
@@ -81,25 +82,30 @@ function getData(membres) {
             hidden_div.style.opacity = 0;
             hidden_div.style.visibility = 'hidden';
         });
-
+        /* DELETE REQUEST */
         btn_delete.addEventListener('click', ()=> {
             let modal_delete = document.getElementById('modal_delete');
             let btn_close_delete = document.getElementById('btn_close_delete');
             modal_delete.style.opacity = 1;
             modal_delete.style.visibility = 'visible';
+
+            // Deleting the image of the membre
             let form_delete = document.getElementById('form_delete');
+            let form_delete_file = document.getElementById('form_delete_file');
             form_delete.setAttribute('value', `${membre.id_membre}`);
-            //hacer un input hidden para recuperar el nom_membre para luego eliminar la imagen desde php con unlink
+            form_delete_file.setAttribute('value', `${membre.image_membre}`);
+
+            // Confirmation message
             let titre = document.getElementById('titre_delete');
             titre.textContent = `Supprimer ${membre.prenom_membre} ${membre.nom_membre} du équipe?`
-
+            // Close delete dialog 'cancel'
             btn_close_delete.addEventListener('click', () => {
                 form_delete.setAttribute('value', '');
                 modal_delete.style.opacity = 0;
                 modal_delete.style.visibility = 'hidden';
             });
         });
-
+        /* UPDATE REQUEST */
         btn_update.addEventListener('click', ()=> {
             let modal_update = document.getElementById('modal_update_membre');
             let btn_close_update = document.getElementById('btn_close_update');
@@ -113,6 +119,7 @@ function getData(membres) {
             document.getElementById('description_membre').setAttribute("value", `${membre.description_membre}`);
             document.getElementById('vignette_membre_esp').setAttribute("value", `${membre.vignette_membre_esp}`);
             document.getElementById('description_membre_esp').setAttribute("value", `${membre.description_membre_esp}`);
+            document.getElementById('old_image_membre').setAttribute("value", `${membre.image_membre}`);
             btn_close_update.addEventListener('click', () => {
                 form_update.setAttribute('value', '');
                 modal_update.style.opacity = 0;
