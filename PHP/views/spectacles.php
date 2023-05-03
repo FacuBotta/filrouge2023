@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spectacles de la compagnie acquaforte theatre">
     <link rel="stylesheet" href="../../CSS/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,700,1,0" />
     <title>Acquaforte Spectacles</title>
@@ -18,13 +19,13 @@
         <img class="logo" src="../../SRL/logo/logo-white.png">
         <h2 id="spectacles_titre">Spectacles</h2>
         <div id="container_spectacle_cards" class="container_cards">
-            <div class="new_spectacle" style="background-image: url(../../SRL/afiches/afiche-escurial.png)">
-            </div>
+            <!-- <div class="new_spectacle" style="background-image: url(../../SRL/afiches/afiche-escurial.png)">
+            </div> -->
         </div>
     </div>
-    <div id="new_spectacle_0" class="spectacle_container_modal hidden_element">
+    <div id="new_spectacle_modal" class="spectacle_container_modal hidden_element">
         <div class="spectacle_head">
-            <h1 id="spectacle_name">Escurial</h1>
+            <h1 id="spectacle_name"></h1>
             <div class="btns_slide_spectacles">
                 <a id="btn_description_spectacle">Description</a>
                 <a id="btn_photos_spectacle">Photos</a>
@@ -37,17 +38,17 @@
             <div class="slider">
                 <div id="spectacle_description" class="slide spectacle_description">
                     <h2>SYNOPSIS</h2>
-                    <p id="p_description_spectacle" class="p_description_spectacle">Un roi fou, enfermé avec son bouffon
+                    <p id="p_description_spectacle" class="p_description_spectacle"><!-- Un roi fou, enfermé avec son bouffon
                         dans son palais décrépit, attend la mort d'une reine
                         agonisante. Par jeu, par défi ou par pure cruauté, le roi impose au bouffon un jeu étrange :
                         pour un temps, ils inverseront leurs attributs et leurs fonctions. Bon gré, mal gré, le
                         bouffon s'exécute, mais il se prend au jeu et, au moment de restituer au roi son sceptre et
-                        sa couronne, il les garde et tente de conserver le pouvoir.</p>
-                    <p id="p_comentaire_spectacle" class="p_comentaire_spectacle">« Ghelderode, c’est le diamant qui
+                        sa couronne, il les garde et tente de conserver le pouvoir. --></p>
+                    <p id="p_comentaire_spectacle" class="p_comentaire_spectacle"><!-- « Ghelderode, c’est le diamant qui
                         ferme le collier de poètes que la Belgique porte autour du
                         cou. Ce diamant noir jette des feux cruels et nobles. Ils ne blessent que les petites âmes.
-                        Ils éblouissent les autres » Jean Cocteau</p>
-                    <p>Titre: Escurial</p>
+                        Ils éblouissent les autres » Jean Cocteau --></p>
+                    <!-- <p>Titre: Escurial</p>
                     <p>Auteur: Michel de Ghelderode</p>
                     <p>Mise en scène: Facundo Melillo</p>
                     <p>Assistante mise en scène: Naibi Esteban</p>
@@ -59,7 +60,7 @@
                     <p>Technicienne Lumière: Naibi Esteban</p>
                     <p>Teaser: Louise Priam</p>
                     <p>Photographie: Paul Deruschi et Lucie Berquiere</p>
-                    <p>Durée: aprox. 1h, à partir de 10 ans</p>
+                    <p>Durée: aprox. 1h, à partir de 10 ans</p> -->
                 </div>
                 <div id="spectacle_images" class="slide spectacle_images slide_hidden">
                     <div class="container_modal">
@@ -75,7 +76,7 @@
                     </div>
                 </div>
                 <div id="spectacle_video" class="slide spectacle_video slide_hidden">
-                    <iframe src="https://www.youtube.com/embed/V_Y0fQHhve8" title="YouTube video player" frameborder="0"
+                    <iframe  title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
                 </div>

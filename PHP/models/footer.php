@@ -6,8 +6,8 @@
         <a href="https://www.youtube.com/@acquafortetheatre760/featured" target="_blank"><img src="../../SRL/icons/icon-youtube.svg" alt="youtube-link"></a>
     </div>
     <div class="footer_links">
-        <a href="index.php">ACCUEIL</a>
-        <a href="#">FAIRE UN DON</a>
+        <a id="foot_accueil" href="index.php">ACCUEIL</a>
+        <a id="foot_don" href="#">FAIRE UN DON</a>
     </div>
 </div>
 </footer>

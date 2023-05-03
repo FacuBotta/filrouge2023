@@ -1,17 +1,22 @@
 <header>
         <div class="container_header">
             <div class="logo">
-                <a href="index.php"><img src="../../SRL/logo/logo.png" alt=""></a>
+                <div class="language">
+                    <p>E</p>
+                    <p>F</p>
+                    <div id="language_switch" class="switch fr"><p>F</p></div>
+                </div>
+                <a href="index.php"><img src="../../SRL/logo/logo.svg" alt="lien vers l'accueil" aria-label="Accueil"></a>
             </div>
             <nav id="nav_menu" class="hidden_nav_menu">
                 <ul>
-                    <li class="hidden_menu_items"><a href="la-compagnie.php">LA COMPAGNIE</a></li>
-                    <li class="hidden_menu_items"><a href="spectacles.php">SPECTACLES</a></li>
-                    <!-- <li class="hidden_menu_items"><a href="action-culturelle.php">ACTION CULTURELE</a></li> -->
-                    <!-- <li class="hidden_menu_items"><a href="formations.php">FORMATIONS</a></li> -->
-                    <li class="hidden_menu_items"><a href="agenda.php">AGENDA</a></li>
-                    <li class="hidden_menu_items"><a href="#">FAIRE UN DON</a></li>
-                    <li class="hidden_menu_items"><a href="contact.php">CONTACT</a></li>
+                    <li class="hidden_menu_items"><a id="menu_compagnie" href="la-compagnie.php">LA COMPAGNIE</a></li>
+                    <li class="hidden_menu_items"><a id="menu_spectacles" href="spectacles.php">SPECTACLES</a></li>
+                    <!-- <li class="hidden_menu_items"><a id="menu_compagnie" href="action-culturelle.php">ACTION CULTURELE</a></li> -->
+                    <!-- <li class="hidden_menu_items"><a id="menu_compagnie" href="formations.php">FORMATIONS</a></li> -->
+                    <li class="hidden_menu_items"><a id="menu_agenda" href="agenda.php">AGENDA</a></li>
+                    <li class="hidden_menu_items"><a id="menu_don" href="#">FAIRE UN DON</a></li>
+                    <li class="hidden_menu_items"><a id="menu_contact" href="contact.php">CONTACT</a></li>
                 </ul>
             </nav>
         </div>

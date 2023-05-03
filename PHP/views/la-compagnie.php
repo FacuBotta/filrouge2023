@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Presentation acquaforte theatre et ses membres">
     <link rel="stylesheet" href="../../CSS/styles.css">
     <title>Acquaforte Qui Sommes Nous</title>
 </head>
@@ -14,7 +15,8 @@
         include_once('../models/header.php')
     ?>
     <div class="container_all container_slide">
-        <img class="logo" src="../../SRL/logo/logo-white.png">
+        <!-- <p id="language" class="francais hidden_element" >francais</p> -->
+        <img class="logo" src="../../SRL/logo/logo-white.svg" alt="logo du la compagnie">
         <h2 id="compagnie_titre">Qui Sommes Nous</h2>
         <p id="compagnie_description">Association franco-argentine créée en 2017 par Facundo Melillo, comédien et metteur en scène argentin.
             Depuis sa création, la compagnie Acquaforte Théâtre bénéficie d’une convention avec l’espace culturel du CHU
@@ -28,7 +30,7 @@
             de marionnettes, le traitement de l’espace par des jeux d’ombre et de lumière.
             Les auteurs de nos pièces traitent de sujets philosophiques, tragiques et/ou politiques. Nos spectacles
             s’adressent donc aux adultes et au jeune public.</p>
-        <img class="btn_slide" src="../../SRL/icons/slide-btn.svg" alt="">
+        <img class="btn_slide" src="../../SRL/icons/slide-btn.svg" alt="button slide">
     </div>
 
     <div id="container_equipe" class="container_all container_all_image hidden_element"
@@ -38,11 +40,8 @@
             <!-- cards from fetch qui-sommes.js -->
         </div>
         <h2 id="soutiens_titre">Nous Soutiens</h2>
-        <div class="container_cards">
-            <div class="soutien"></div>
-            <div class="soutien"></div>
-            <div class="soutien"></div>
-            <div class="soutien"></div>
+        <div id="cards_soutiens" class="container_cards">
+            <!-- cards from fetch qui-sommes.js -->
         </div>
         <img class="btn_slide_equipe" src="../../SRL/icons/slide-btn.svg" alt="">
     </div>
