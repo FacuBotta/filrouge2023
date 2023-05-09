@@ -386,13 +386,15 @@ nav ul li {
 
 .admin_form form .admin_form_infos .new_field_info {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    background-color: #A83CBA;
 }
 
-.admin_form form .admin_form_infos .new_field_info :nth-child(1) {
-    width: 40%;
-}
+/* .admin_form form .admin_form_infos .new_field_info :nth-child(2) {
+    width: 50%;
+    margin-right: 10px;
+} */
 
 .btn_supr_new_field {
     cursor: pointer;
@@ -636,22 +638,35 @@ video {
 }
 
 .btn_event_card {
-    background-color: var(--active-color);
-    font-family: var(--secondary-font);
-    border: none;
-    border-radius: 5px;
-    padding: 1px 10px;
-    color: white !important;
+    color: var(--active-color);
     position: absolute;
-    bottom: 2%;
-    right: 32%;
-    font-size: .8rem;
+    bottom: 1%;
+    right: 2%;
+    font-size: 1.4rem;
+    transition: all .6s;
 }
-
+.adresse_link:hover {
+    color: var(--active-color);
+    text-decoration: underline;
+}
+.p_events_cards {
+    vertical-align: text-top;
+}
 .btn_event_card:hover {
-    outline: solid 2px var(--active-color);
-    background-color: var(--text-color);
+    scale: 1.2;
 }
+.tooltip_agenda {
+    background-color: black;
+    color: white;
+    width: 120px;
+    height: 30px;
+    border: solid 2px white;
+    border-radius: 8px 8px 8px 0;
+    position: fixed;
+    z-index: 5000;
+    visibility: hidden;
+    opacity: 0;
+};
 
 /* <<<< SPECTACLES >>>> */
 

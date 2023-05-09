@@ -5,6 +5,7 @@ fetch("../../PHP/Controllers/spectacles.php", {
     .then((response) => response.json())
     .then((data) => {
         getDataSpectacles(data);
+        console.log(data);
     });
 console.log(localStorage);
 
@@ -27,6 +28,7 @@ if (localStorage.switch_class == 'switch esp') {
 } else {
     setSpectaclesFrancais();
 };
+
 const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -123,11 +125,12 @@ function getDataSpectacles(spectacles) {
             container_spectacle_cards.classList.toggle("slide_hidden");
             new_spectacle_modal.classList.toggle('hidden_element');
 
-            // Setting the content to the first part of the main carousel
+            // Setting the content to the first part (description) of the main carousel
             const titre = document.getElementById('spectacle_name');
             titre.textContent = spectacle.titre_spectacle;
             let p_description_spectacle = document.getElementById('p_description_spectacle');
             let p_comentaire_spectacle = document.getElementById('p_comentaire_spectacle');
+
             if (localStorage.switch_class == 'switch esp') {
                 p_description_spectacle.textContent = spectacle.description_spectacle.description_esp;
                 p_comentaire_spectacle.textContent = spectacle.site_spectacle.site_esp;
@@ -149,7 +152,6 @@ function getDataSpectacles(spectacles) {
                 };
             });
             observer.observe(switch_language, { attributes: true });
-            
             const spectacle_description = document.getElementById('spectacle_description');
 
             const info_array = Object.entries(spectacle.info_spectacle);
@@ -158,7 +160,26 @@ function getDataSpectacles(spectacles) {
                 new_info.setAttribute('id', `info_${spectacle.titre_spectacle}_${i}`);
                 let new_titre = document.createElement('span');
                 new_titre.style.fontWeight = 'bold';
-                new_titre.textContent = `${spectacle.info_spectacle[i].titre_info}: `;
+
+                if (localStorage.switch_class == 'switch esp') {
+                    new_titre.textContent = `${spectacle.info_spectacle[i].titre_info_esp}: `;
+                } else {
+                    new_titre.textContent = `${spectacle.info_spectacle[i].titre_info_fr}: `;
+                };
+                
+                const observer = new MutationObserver((mutationsList) => {
+                    for (const mutation of mutationsList) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            if (switch_language.classList.contains('fr')) {
+                                new_titre.textContent = `${spectacle.info_spectacle[i].titre_info_fr}: `;
+                            } else if (switch_language.classList.contains('esp')) {
+                                new_titre.textContent = `${spectacle.info_spectacle[i].titre_info_esp}: `;
+                            };
+                        };
+                    };
+                });
+                observer.observe(switch_language, { attributes: true });
+                
                 new_info.appendChild(new_titre);
                 new_info.appendChild(document.createTextNode(spectacle.info_spectacle[i].contenue_info));
             };

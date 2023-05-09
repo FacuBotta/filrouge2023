@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-branch-tests',
         'version' => 'dev-branch-tests',
-        'reference' => '76152210de7c061d6201c9a16915cd25f724f172',
+        'reference' => '5fbf0080a73ecbb84a899eeb76d7b792f4b67f4f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-branch-tests',
             'version' => 'dev-branch-tests',
-            'reference' => '76152210de7c061d6201c9a16915cd25f724f172',
+            'reference' => '5fbf0080a73ecbb84a899eeb76d7b792f4b67f4f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

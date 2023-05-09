@@ -31,15 +31,16 @@ if (isset($_FILES['files_spectacle']) && isset($_FILES['affiche_spectacle']) && 
 
     $info = array();
     foreach ($_POST as $key => $value) {
-        if (strpos($key, 'titre_info_') === 0) {
-            $index = substr($key, 11);
+        if (strpos($key, 'contenue_info_') === 0) {
+            $index = substr($key, 14);
             $info[$index] = array(
-                'titre_info' => ucfirst($value),
+                'titre_info_fr' => ucfirst($_POST['titre_info_fr_' . $index]),
+                'titre_info_esp' => ucfirst($_POST['titre_info_esp_' . $index]),
                 'contenue_info' => ucfirst($_POST['contenue_info_' . $index])
             );
         };
     };
-
+    
     $images = array();
     if (isset($_FILES['files_spectacle'])) {
         $count = count($_FILES['files_spectacle']['name']);
@@ -137,6 +138,17 @@ if (!empty($_POST['form_update'])) {
 
         $info = array();
         foreach ($_POST as $key => $value) {
+            if (strpos($key, 'contenue_info_') === 0) {
+                $index = substr($key, 14);
+                $info[$index] = array(
+                    'titre_info_fr' => ucfirst($_POST['titre_info_fr_' . $index]),
+                    'titre_info_esp' => ucfirst($_POST['titre_info_esp_' . $index]),
+                    'contenue_info' => ucfirst($_POST['contenue_info_' . $index])
+                );
+            };
+        };
+        /* $info = array();
+        foreach ($_POST as $key => $value) {
             if (strpos($key, 'titre_info_') === 0) {
                 $index = substr($key, 11);
                 $info[$index] = array(
@@ -144,14 +156,14 @@ if (!empty($_POST['form_update'])) {
                     'contenue_info' => ucfirst($_POST['contenue_info_' . $index])
                 );
             };
-        };
+        }; */
 
         $images = array();
 
         if (!empty($_FILES['new_files_spectacle']['name'][0])) {
             $old_images = $_POST['old_files_spectacle'];
             $images_array = explode(',', $old_images);
-            foreach($images_array as $link) {
+            foreach ($images_array as $link) {
                 unlink($link);
             };
             $count = count($_FILES['new_files_spectacle']['name']);
@@ -163,8 +175,6 @@ if (!empty($_POST['form_update'])) {
                     move_uploaded_file($_FILES['new_files_spectacle']['tmp_name'][$i], $image);
                     $images[] = $image;
                     $images_json = json_encode($images);
-
-                    
                 } else {
                     echo "<p> Extension ou taille incorrect </p>";
                 };

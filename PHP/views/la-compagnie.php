@@ -18,7 +18,7 @@
         <!-- <p id="language" class="francais hidden_element" >francais</p> -->
         <img class="logo" src="../../SRL/logo/logo-white.svg" alt="logo du la compagnie">
         <h2 id="compagnie_titre">Qui Sommes Nous</h2>
-        <p id="compagnie_description">Association franco-argentine créée en 2017 par Facundo Melillo, comédien et metteur en scène argentin.
+        <p id="compagnie_description"><!-- Association franco-argentine créée en 2017 par Facundo Melillo, comédien et metteur en scène argentin.
             Depuis sa création, la compagnie Acquaforte Théâtre bénéficie d’une convention avec l’espace culturel du CHU
             (Centre Hospitalier Universitaire de Montpellier). Cette convention nous a permis de développer nos projets
             dans un espace fixe de création. La préparation du travail de plateau, les répétitions et les premières
@@ -29,7 +29,7 @@
             dans la culture latino-américaine. Notre projet artistique est axé sur la création de pièces de masques et
             de marionnettes, le traitement de l’espace par des jeux d’ombre et de lumière.
             Les auteurs de nos pièces traitent de sujets philosophiques, tragiques et/ou politiques. Nos spectacles
-            s’adressent donc aux adultes et au jeune public.</p>
+            s’adressent donc aux adultes et au jeune public. --></p>
         <img class="btn_slide" src="../../SRL/icons/slide-btn.svg" alt="button slide">
     </div>
 

@@ -113,21 +113,26 @@ function getDataSpectacles(events) {
             document.getElementById('old_affiche_spectacle').setAttribute("value", `${spectacle.affiche_spectacle}`);
             document.getElementById('old_files_spectacle').setAttribute("value", spectacle.images_spectacle);
 
-            console.log(spectacle);
+            // console.log(spectacle);
             const info_array = Object.entries(spectacle.info_spectacle);
             const btn_ajouter_new_info = document.getElementById("ajouter_new_info");
             for (let i = 1; i < info_array.length + 1; i++) {
                 console.log(spectacle.info_spectacle[i]);
 
-                //Making new field container and two inputs
+                //Making new field container and inputs
                 const new_field_info = document.createElement("div");
                 new_field_info.classList.add("new_field_info");
                 new_field_info.setAttribute("id", "field_" + i);
 
-                const input_titre = document.createElement("input");
-                input_titre.setAttribute("type", "text");
-                input_titre.setAttribute("name", `titre_info_${i}`);
-                input_titre.setAttribute("value", `${spectacle.info_spectacle[i].titre_info}`);
+                const input_titre_fr = document.createElement("input");
+                input_titre_fr.setAttribute("name", `titre_info_fr_${i}`);
+                input_titre_fr.setAttribute("value", `${spectacle.info_spectacle[i].titre_info_fr}`);
+                input_titre_fr.setAttribute("type", "text");
+                
+                const input_titre_esp = document.createElement("input");
+                input_titre_esp.setAttribute("type", "text");
+                input_titre_esp.setAttribute("name", `titre_info_esp_${i}`);
+                input_titre_esp.setAttribute("value", `${spectacle.info_spectacle[i].titre_info_esp}`);
 
                 const input_contenue = document.createElement("input");
                 input_contenue.setAttribute("type", "text");
@@ -138,7 +143,8 @@ function getDataSpectacles(events) {
                 btn_supprimer_field.setAttribute('class', 'material-symbols-rounded btn_supr_new_field');
                 btn_supprimer_field.innerHTML = 'delete';
 
-                new_field_info.appendChild(input_titre);
+                new_field_info.appendChild(input_titre_fr);
+                new_field_info.appendChild(input_titre_esp);
                 new_field_info.appendChild(input_contenue);
                 new_field_info.appendChild(btn_supprimer_field);
                 form_info.insertBefore(new_field_info, btn_ajouter_new_info.nextSibling);
@@ -213,27 +219,31 @@ btn_supprimer_info.style.display = "none";
 let field_count = 1;
 btn_ajouter_info.addEventListener("click", function (event) {
     event.preventDefault();
-    //Making new field container and two inputs
+    //Making new field container and this inputs
     const new_field_info = document.createElement("div");
     new_field_info.classList.add("new_field_info");
     new_field_info.setAttribute("id", "field_" + field_count);
 
-    const input_titre = document.createElement("input");
-    input_titre.setAttribute("type", "text");
-    input_titre.setAttribute("name", `titre_info_${field_count}`);
-    input_titre.setAttribute("placeholder", "Titre Info");
+    const input_titre_fr = document.createElement("input");
+    input_titre_fr.setAttribute("type", "text");
+    input_titre_fr.setAttribute("name", `titre_info_fr_${field_count}`);
+    input_titre_fr.setAttribute("placeholder", "Titre Info Fr:");
+    const input_titre_esp = document.createElement("input");
+    input_titre_esp.setAttribute("type", "text");
+    input_titre_esp.setAttribute("name", `titre_info_esp_${field_count}`);
+    input_titre_esp.setAttribute("placeholder", "Titre Info Esp:");
 
     const input_contenue = document.createElement("input");
     input_contenue.setAttribute("type", "text");
     input_contenue.setAttribute("name", `contenue_info_${field_count}`);
     input_contenue.setAttribute("placeholder", "Contenue Info");
 
-    new_field_info.appendChild(input_titre);
+    new_field_info.appendChild(input_titre_fr);
+    new_field_info.appendChild(input_titre_esp);
     new_field_info.appendChild(input_contenue);
 
     const infos_spectacles = document.getElementById('infos_spectacle');
     infos_spectacles.appendChild(new_field_info);
-    // form_info.insertBefore(new_field_info, btn_ajouter_info.nextSibling);
 
     field_count++;
 
