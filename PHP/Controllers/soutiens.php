@@ -1,12 +1,12 @@
 <?php
 include('../models/connect.php');
 
-
 /* INSERT REQUEST */
 if (isset($_FILES['image_soutien']) && isset($_POST["nom_soutien"]) && isset($_POST["link_soutien"])) {
     $extensions_ok = array('png', 'jpg');
     if (filesize($_FILES['image_soutien']['size'] > 3072000)  || !in_array(substr(strrchr($_FILES['image_soutien']['name'], '.'), 1), $extensions_ok)) {
-        echo "<p> Extension ou taille incorrect </p>";
+        $_SESSION['message'] = "images error";
+        header('Location: ../views/admin.php');
     } else {
         $ext = substr(strrchr($_FILES['image_soutien']['name'], '.'), 1);
         if (isset($_POST['nom_soutien'])) {
@@ -26,9 +26,12 @@ if (isset($_FILES['image_soutien']) && isset($_POST["nom_soutien"]) && isset($_P
         $req->bindParam(':lien_coll', $link);
         $req->bindParam(':image_coll', $image);
         $req->execute();
+        $_SESSION['message'] = "add ok";
         header('Location: ../views/admin.php');
     } catch (Exception $e) {
-        die("Erreur:" . $e->getMessage());
+        $_SESSION['message'] = "add error";
+        header('Location: ../views/admin.php');
+        // die("Erreur:" . $e->getMessage());
     }
 }
 
@@ -39,6 +42,7 @@ if (!empty($_POST['form_delete'])) {
     $req = $bdd->prepare('DELETE FROM collaborateurs WHERE id_coll=:id_coll');
     $req->bindParam(':id_coll', $_POST['id_delete']);
     $req->execute();
+    $_SESSION['message'] = "deleted";
     header('Location: ../views/admin.php');
 }
 
@@ -46,7 +50,6 @@ if (!empty($_POST['form_delete'])) {
 if (!empty($_POST['form_update'])) {
     try {
         if (!empty($_FILES['new_image_coll'])) {
-
             $extensions_ok = array('png', 'jpg');
             if (filesize($_FILES['new_image_coll']['size'] > 3072000)  || !in_array(substr(strrchr($_FILES['new_image_coll']['name'], '.'), 1), $extensions_ok)) {
                 // Seting old image if the new image is null or incorret
@@ -81,9 +84,12 @@ if (!empty($_POST['form_update'])) {
         $req->bindParam(':lien_coll', $link);
         $req->bindParam(':image_coll', $new_image);
         $req->execute();
+        $_SESSION['message'] = "update ok";
         header('Location: ../views/admin.php');
     } catch (Exception $e) {
-        die("Erreur:" . $e->getMessage());
+        $_SESSION['message'] = "add error";
+        header('Location: ../views/admin.php');
+        // die("Erreur:" . $e->getMessage());
     }
 }
 

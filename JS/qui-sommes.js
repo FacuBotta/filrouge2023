@@ -1,31 +1,27 @@
+// Calling data
 fetch("../../PHP/Controllers/equipe.php", {
     method: "POST",
 })
     .then((response) => response.json())
     .then((data) => {
         getDataMembres(data);
-        // console.log(data);
     });
-
 fetch("../../PHP/Controllers/soutiens.php", {
     method: "POST"
 })
     .then((response) => response.json())
     .then((data) => {
         getDataSoutien(data);
-        // console.log(data);
     });
-
 fetch("../../PHP/Controllers/description.php", {
     method: "POST"
 })
     .then((response) => response.json())
     .then((data) => {
         getDataDescription(data);
-        // console.log(data);
     });
-const compagnie_description = document.getElementById('compagnie_description');
 
+// Setting the functions to translate the static content of the page
 function setEquipeEspanol() {
     document.getElementById('compagnie_titre').textContent = 'Quienes somos';
     document.getElementById('equipe_titre').textContent = 'Nuestro equipo';
@@ -36,11 +32,17 @@ function setEquipeFrancais() {
     document.getElementById('equipe_titre').textContent = 'Notre Équipe';
     document.getElementById('soutiens_titre').textContent = 'Nous Soutiens';
 };
-function getDataDescription(description) {
-    const presentation = JSON.parse(description[0].presentation);
-    compagnie_description.innerHTML = presentation.description_fr;
-    // console.log(localStorage);
 
+// Setting the description company content according the data base info
+const compagnie_description = document.getElementById('compagnie_description');
+function getDataDescription(description) {
+    // console.log(description);
+    // Recovering the json data from the description array
+    const presentation = JSON.parse(description[0].presentation);
+
+    // Setting the description lenguage in french like default value
+    compagnie_description.innerHTML = presentation.description_fr;
+    // Setting the description lenguage according to the localStorage data
     if (localStorage.switch_class == 'switch esp') {
         compagnie_description.innerHTML = presentation.description_esp;
         setEquipeEspanol();
@@ -48,6 +50,7 @@ function getDataDescription(description) {
         compagnie_description.innerHTML = presentation.description_fr;
         setEquipeFrancais();
     };
+    // Observing the changes in the 'switch_language' class to translate the page
     const observer = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -64,12 +67,11 @@ function getDataDescription(description) {
     observer.observe(switch_language, { attributes: true });
 };
 
+// Setting the 'Soutiens' content
 const cards_equipe = document.getElementById('cards_equipe');
 const cards_soutiens = document.getElementById('cards_soutiens');
-
 function getDataSoutien(soutiens) {
     soutiens.forEach(soutien => {
-        console.log(soutien.nom_coll);
         const link_soutien = cards_soutiens.appendChild(document.createElement("a"));
         link_soutien.setAttribute('href', soutien.lien_coll);
         link_soutien.setAttribute('target', '_blank');
@@ -80,6 +82,7 @@ function getDataSoutien(soutiens) {
     });
 };
 
+// Setting the 'Membres' content
 function getDataMembres(membre) {
     membre.forEach((membre, i) => {
         const person_card = cards_equipe.appendChild(document.createElement("div"));
@@ -107,13 +110,16 @@ function getDataMembres(membre) {
         const person_card_text = block_text_card.appendChild(document.createElement("p"));
         person_card_text.setAttribute("id", `person_card_text_${i}`);
 
+        // Setting the lenguage according to the localStorage data
         if (localStorage.switch_class == 'switch esp') {
             text_CV.textContent = `${membre.description_membre.description_esp}`;
             person_card_text.textContent = `${membre.description_membre.vignette_esp}`;
         } else {
             text_CV.textContent = `${membre.description_membre.description_fr}`;
             person_card_text.textContent = `${membre.description_membre.vignette_fr}`;
-        }
+        };
+
+        // Observing the changes in the 'switch_language' class to translate the 'membres' content
         const observer = new MutationObserver((mutationsList) => {
             for (const mutation of mutationsList) {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -129,6 +135,7 @@ function getDataMembres(membre) {
         });
         observer.observe(switch_language, { attributes: true });
 
+        // Showing the modal of the clicked member
         person_image.addEventListener('click', () => {
             block_person_card.classList.toggle("block_person_card_active");
             person_card_CV.classList.toggle("hidden_element");
@@ -137,18 +144,18 @@ function getDataMembres(membre) {
     });
 };
 
-
-//slide qui sommes
+// Slide description page 'qui sommes'
 const container_slide = document.querySelector('.container_slide');
 const container_equipe = document.getElementById('container_equipe');
-
 document.querySelector('.btn_slide').addEventListener('click', slideScreen);
 document.querySelector('.btn_slide_equipe').addEventListener('click', slideScreenEquipe);
-
+// Function to hide the description slide
 function slideScreen() {
     container_slide.classList.toggle("active_container_slide");
     container_equipe.classList.toggle('hidden_element');
 };
+// Function to show the description slide
+// the only difference is the setTimeout function for aesthetic behavior only
 function slideScreenEquipe() {
     container_slide.classList.remove('active_container_slide');
     setTimeout(() => {

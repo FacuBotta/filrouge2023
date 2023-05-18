@@ -13,9 +13,12 @@ if (isset($_POST["description_esp"]) && isset($_POST["description_fr"])) {
         $req = $bdd->prepare("UPDATE description_compagnie SET presentation = :presentation");
         $req->bindParam(':presentation', $description_json);
         $req->execute();
+        $_SESSION['message'] = "update ok";
         header('Location: ../views/admin.php');
     } catch (Exception $e) {
-        die("Erreur:" . $e->getMessage());
+        $_SESSION['message'] = "add error";
+        header('Location: ../views/admin.php');
+        // die("Erreur:" . $e->getMessage());
     }
 }
 

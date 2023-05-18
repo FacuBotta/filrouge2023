@@ -1,3 +1,33 @@
+<?php
+session_start();
+
+if (empty($_SESSION["user"])) {
+    echo 'está de bardo';
+    session_destroy();
+    header("Location: ./connexion.php");
+}
+
+if (isset($_SESSION['message']) && $_SESSION['message'] == 'add ok') {
+    echo '<script> alert("Addition réussi!"); </script>';
+    unset($_SESSION['message']);
+}
+if (isset($_SESSION['message']) && $_SESSION['message'] == 'add error') {
+    echo '<script> alert("Un erreur est survenue veulliez réessayer"); </script>';
+    unset($_SESSION['message']);
+}
+if (isset($_SESSION['message']) && $_SESSION['message'] == 'deleted') {
+    echo '<script> alert("Suppression réussie!"); </script>';
+    unset($_SESSION['message']);
+}
+if (isset($_SESSION['message']) && $_SESSION['message'] == 'images error') {
+    echo '<script> alert("Taille ou extension incorrect"); </script>';
+    unset($_SESSION['message']);
+}
+if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
+    echo '<script> alert("Mis à jour effectué!"); </script>';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +62,7 @@
             <h1>Modifier Spectacle</h1>
             <form action="../Controllers/spectacles.php" method="post" enctype="multipart/form-data">
                 <div>
-                    <input type="hidden" name="form_update" value="1">  
+                    <input type="hidden" name="form_update" value="1">
                     <input id="id_update_spectacle" type="hidden" name="id_spectacle">
 
                     <input id="titre_spectacle" name="new_titre_espectacle" type="text" placeholder="Titre"><br>
@@ -45,14 +75,20 @@
                     <h3>Informations</h3>
                     <button id="ajouter_new_info">Ajouter une Information</button>
                     <!-- <button id="supprimer_new_info">Supprimer une Information</button> -->
-                    
-                    <label for="new_files_spectacle"><h3>Images:</h3></label>
+
+                    <label for="new_files_spectacle">
+                        <h3>Images:</h3>
+                    </label>
                     <input type="file" name="new_files_spectacle[]" multiple id="new_files_spectacle">
                     <input type="hidden" name="old_files_spectacle" id="old_files_spectacle">
-                    <label for="new_affiche_spectacle"><h3>Affiche:</h3></label>
+                    <label for="new_affiche_spectacle">
+                        <h3>Affiche:</h3>
+                    </label>
                     <input type="file" name="new_affiche_spectacle">
                     <input id="old_affiche_spectacle" type="hidden" name="old_affiche_spectacle">
-                    <label for="new_video_spectacle"><h3>Video:</h3></label>
+                    <label for="new_video_spectacle">
+                        <h3>Video:</h3>
+                    </label>
                     <input id="video_spectacle" type="text" placeholder="Link video" name="new_video_spectacle" id="new_video_spectacle">
                     <input type="submit" value="Mettre à jour">
                     <div class="btn_close_update"><a href="./admin.php" id="btn_close_update">Annuler</a></div>
@@ -68,10 +104,9 @@
             <h1>Ajouter un spectacle</h1>
             <form action="../Controllers/spectacles.php" method="post" enctype="multipart/form-data">
                 <div>
-                    <input type="hidden" name="form_update" value="1">
+                    <input type="hidden" name="form_add" value="1">
                     <input id="id_spectacle" type="hidden" name="id_spectacle">
-
-                    <input  name="titre_espectacle" type="text" placeholder="Titre"><br>
+                    <input name="titre_espectacle" type="text" placeholder="Titre"><br>
                     <textarea name="description_fr" placeholder="Description en français" cols="80" rows="15"></textarea><br>
                     <textarea name="site_fr" placeholder="Site en français" cols="80" rows="10"></textarea><br>
                     <textarea name="description_esp" placeholder="Descripcion en español" cols="80" rows="15"></textarea><br>
@@ -80,14 +115,21 @@
                 <div class="admin_form_infos" id="form_info">
                     <h3>Informations</h3>
                     <button id="ajouter_info">Ajouter une Information</button>
-                    <div id="infos_spectacle"></div>
+                    <div id="infos_spectacle">
+                        <!-- News info fields added from JS -->
+                    </div>
                     <button id="supprimer_info">Supprimer une Information</button>
-                    <!-- news info fields addeds from js -->
-                    <label for="files_spectacle"><h3>Images:</h3></label>
+                    <label for="files_spectacle">
+                    <h3>Images:</h3>
+                    </label>
                     <input type="file" name="files_spectacle[]" multiple id="files_spectacle">
-                    <label for="affiche_spectacle"><h3>Affiche:</h3></label>
-                    <input type="file" name="affiche_spectacle" ><br>
-                    <label for="video_spectacle"><h3>Video:</h3></label>
+                    <label for="affiche_spectacle">
+                    <h3>Affiche:</h3>
+                    </label>
+                    <input type="file" name="affiche_spectacle"><br>
+                    <label for="video_spectacle">
+                    <h3>Video:</h3>
+                    </label>
                     <input type="text" placeholder="Link video" name="video_spectacle" id="video_spectacle">
                     <input type="submit" value="Ajouter spectacle">
                 </div>
@@ -130,7 +172,7 @@
                     <label for="image_agenda">Affiche:</label>
                     <!-- Seting old image like default from JS in case of not new image to membre -->
                     <input id="old_image_agenda" type="hidden" name="old_image_agenda"><br>
-                    <input type="file" name="new_image_agenda" ><br>
+                    <input type="file" name="new_image_agenda"><br>
                     <label for="date_agenda">Date:</label>
                     <input id="date_agenda" type="datetime-local" name="date_agenda">
                     <label for="adresse_agenda">Adresse</label>
@@ -179,7 +221,7 @@
                     <label for="new_image_membre">Photo:</label>
                     <!-- Seting old image like default from JS in case of not new image to membre -->
                     <input id="old_image_membre" type="hidden" name="old_image_membre"><br>
-                    <input type="file" name="new_image_membre" ><br>
+                    <input type="file" name="new_image_membre"><br>
                     <input id="vignette_membre" type="textarea" name="vignette_membre"><br>
                     <input id="description_membre" type="text" name="description_membre"><br>
                     <input id="vignette_membre_esp" type="text" name="vignette_membre_esp"><br>
@@ -221,7 +263,7 @@
                     <label for="new_image_coll">Photo:</label>
                     <!-- Seting old image like default from JS in case of not new image to membre -->
                     <input id="old_image_coll" type="hidden" name="old_image_coll"><br>
-                    <input type="file" name="new_image_coll" ><br>
+                    <input type="file" name="new_image_coll"><br>
                     <input type="submit" value="Mettre à jour">
                     <div class="btn_close_update"><a href="./admin.php" id="btn_close_update">Annuler</a></div>
                 </div>
@@ -229,44 +271,55 @@
         </div>
     </div>
     <!-- <<>> -->
-    <h1>Page Admin</h1>
-    <h3>Description</h3>
-    <div id="btn_description" class="btn_description"><p>Modifier</p></div>
-    <div id="form_description" class="form_description hidden_element">
-        <form action="../Controllers/description.php" method="post">
-            <input type="hidden" name="form_update" value="1">
-            <label for="description_fr">Description en français</label><br>
-            <textarea name="description_fr" id="compagnie_description_fr" cols="60" rows="15"></textarea><br>
-            <label for="description_esp">Descripción en español</label><br>
-            <textarea name="description_esp" id="compagnie_description_esp" cols="60" rows="15"></textarea><br>
-            <input type="submit" value="Mettre à jour">
-        </form>
+    <div class="container_all container_admin">
+        <h1>Page Admin</h1>
+        <div class="container_btns_admin">
+            <div>
+                <a href="../Controllers/deconnexion.php">Deconnexion</a>
+            </div>
+            <div>
+                <a target="_blank" href="./index.php">Voir page</a>
+            </div>
+        </div>
+            <h3>Description</h3>
+        <div id="btn_description" class="btn_description">
+            <p>Modifier</p>
+        </div>
+        <div id="form_description" class="form_description hidden_element">
+            <form action="../Controllers/description.php" method="post">
+                <input type="hidden" name="form_update" value="1">
+                <label for="description_fr">Description en français</label><br>
+                <textarea name="description_fr" id="compagnie_description_fr" cols="60" rows="15"></textarea><br>
+                <label for="description_esp">Descripción en español</label><br>
+                <textarea name="description_esp" id="compagnie_description_esp" cols="60" rows="15"></textarea><br>
+                <input type="submit" value="Mettre à jour">
+            </form>
+        </div>
+        <h3>Spectacles</h3>
+        <div id="admin_spectacles" class="container_cards">
+            <div id="btn_add_spectacle" class="admin_item add_item"><span class="material-symbols-rounded">
+                    add
+                </span></div>
+        </div>
+        <h3>Agenda</h3>
+        <div id="admin_agenda" class="container_cards">
+            <div id="btn_add_event" class="admin_item add_item"><span class="material-symbols-rounded">
+                    add
+                </span></div>
+        </div>
+        <h3>Équipe</h3>
+        <div id="admin_membres" class="container_cards">
+            <div id="btn_add_membre" class="admin_item add_item"><span class="material-symbols-rounded">
+                    add
+                </span></div>
+        </div>
+        <h3>Soutiens</h3>
+        <div id="admin_soutiens" class="container_cards">
+            <div id="btn_add_soutien" class="admin_item add_item"><span class="material-symbols-rounded">
+                    add
+                </span></div>
+        </div>
     </div>
-    <h3>Spectacles</h3>
-    <div id="admin_spectacles" class="container_cards">
-        <div id="btn_add_spectacle" class="admin_item add_item"><span class="material-symbols-rounded">
-                add
-            </span></div>
-    </div>
-    <h3>Agenda</h3>
-    <div id="admin_agenda" class="container_cards">
-        <div id="btn_add_event" class="admin_item add_item"><span class="material-symbols-rounded">
-                add
-            </span></div>
-    </div>
-    <h3>Équipe</h3>
-    <div id="admin_membres" class="container_cards">
-        <div id="btn_add_membre" class="admin_item add_item"><span class="material-symbols-rounded">
-                add
-            </span></div>
-    </div>
-    <h3>Soutiens</h3>
-    <div id="admin_soutiens" class="container_cards">
-        <div id="btn_add_soutien" class="admin_item add_item"><span class="material-symbols-rounded">
-                add
-            </span></div>
-    </div>
-
     <script src="../../JS/admin.js"></script>
 </body>
 

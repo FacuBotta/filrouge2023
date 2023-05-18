@@ -1,7 +1,7 @@
 <header>
         <div class="container_header">
             <div class="logo">
-                <div class="language">
+                <div id="language_switch_container" class="language">
                     <p>E</p>
                     <p>F</p>
                     <div id="language_switch" class="switch fr"><p>F</p></div>

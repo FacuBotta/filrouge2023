@@ -1,12 +1,12 @@
 <?php
 include('../models/connect.php');
 
-
 /* INSERT REQUEST */
 if (isset($_FILES['image_agenda']) && isset($_POST["nom_agenda"]) && isset($_POST["date_agenda"]) && isset($_POST["adresse_lieu"]) && isset($_POST["adresse_num"]) && isset($_POST["adresse_rue"]) && isset($_POST["adresse_ville"])) {
     $extensions_ok = array('png', 'jpg');
     if (filesize($_FILES['image_agenda']['size'] > 3072000)  || !in_array(substr(strrchr($_FILES['image_agenda']['name'], '.'), 1), $extensions_ok)) {
-        echo "<p> Extension ou taille incorrect </p>";
+        $_SESSION['message'] = "images error";
+        header('Location: ../views/admin.php');
     } else {
         $ext = substr(strrchr($_FILES['image_agenda']['name'], '.'), 1);
         if (isset($_POST['nom_agenda'])) {
@@ -34,9 +34,12 @@ if (isset($_FILES['image_agenda']) && isset($_POST["nom_agenda"]) && isset($_POS
         $req->bindParam(':adr_rue_event', $adresse_rue);
         $req->bindParam(':adr_ville_event', $adresse_ville);
         $req->execute();
+        $_SESSION['message'] = "add ok";
         header('Location: ../views/admin.php');
     } catch (Exception $e) {
-        die("Erreur:" . $e->getMessage());
+        $_SESSION['message'] = "add error";
+        header('Location: ../views/admin.php');
+        // die("Erreur:" . $e->getMessage());
     }
 }
 
@@ -91,9 +94,12 @@ if (!empty($_POST['form_update'])) {
         $req->bindParam(':adr_rue_event', $adr_rue);
         $req->bindParam(':adr_ville_event', $adr_ville);
         $req->execute();
+        $_SESSION['message'] = "update ok";
         header('Location: ../views/admin.php');
     } catch (Exception $e) {
-        die("Erreur:" . $e->getMessage());
+        $_SESSION['message'] = "add error";
+        header('Location: ../views/admin.php');
+        // die("Erreur:" . $e->getMessage());
     }
 }
 
@@ -104,6 +110,7 @@ if (!empty($_POST['form_delete'])) {
     $req = $bdd->prepare('DELETE FROM agenda WHERE id_event=:id_event');
     $req->bindParam(':id_event', $_POST['id_delete']);
     $req->execute();
+    $_SESSION['message'] = "deleted";
     header('Location: ../views/admin.php');
 }
 

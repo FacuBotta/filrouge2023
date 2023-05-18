@@ -1,12 +1,12 @@
 <?php
 include('../models/connect.php');
 
-
 /* INSERT REQUEST */
 if (isset($_FILES['image_membre']) && isset($_POST["nom_membre"]) && isset($_POST["prenom_membre"]) && isset($_POST["vignette_membre"]) && isset($_POST["description_membre"]) && isset($_POST["vignette_membre_esp"]) && isset($_POST["description_membre_esp"])) {
     $extensions_ok = array('png', 'jpg');
     if (filesize($_FILES['image_membre']['size'] > 3072000)  || !in_array(substr(strrchr($_FILES['image_membre']['name'], '.'), 1), $extensions_ok)) {
-        echo "<p> Extension ou taille incorrect </p>";
+        $_SESSION['message'] = "images error";
+        header('Location: ../views/admin.php');
     } else {
         $ext = substr(strrchr($_FILES['image_membre']['name'], '.'), 1);
         if (isset($_POST['prenom_membre'])) {
@@ -36,9 +36,12 @@ if (isset($_FILES['image_membre']) && isset($_POST["nom_membre"]) && isset($_POS
         $req->bindParam(':image_membre', $image);
         $req->bindParam(':description_membre', $description_json);
         $req->execute();
+        $_SESSION['message'] = "add ok";
         header('Location: ../views/admin.php');
     } catch (Exception $e) {
-        die("Erreur:" . $e->getMessage());
+        $_SESSION['message'] = "add error";
+        header('Location: ../views/admin.php');
+        // die("Erreur:" . $e->getMessage());
     }
 }
 
@@ -49,6 +52,7 @@ if (!empty($_POST['form_delete'])) {
     $req = $bdd->prepare('DELETE FROM membres WHERE id_membre=:id_membre');
     $req->bindParam(':id_membre', $_POST['id_delete']);
     $req->execute();
+    $_SESSION['message'] = "deleted";
     header('Location: ../views/admin.php');
 }
 
@@ -101,9 +105,12 @@ if (!empty($_POST['form_update'])) {
         $req->bindParam(':description_membre', $description_json);
         $req->bindParam(':image_membre', $new_image);
         $req->execute();
+        $_SESSION['message'] = "update ok";
         header('Location: ../views/admin.php');
     } catch (Exception $e) {
-        die("Erreur:" . $e->getMessage());
+        $_SESSION['message'] = "add error";
+        header('Location: ../views/admin.php');
+        // die("Erreur:" . $e->getMessage());
     }
 }
 

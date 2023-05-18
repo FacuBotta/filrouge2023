@@ -1,5 +1,4 @@
 <?php
-// use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\PHPMailer;
 require '../../vendor/autoload.php';
 $mail = new PHPMailer(true);
@@ -32,9 +31,12 @@ if (isset($_POST['contact_nom']) && isset($_POST['contact_mail']) && isset($_POS
     $mail->Body = $body;
     try {
         $mail->send();
+        $_SESSION['contact'] = "cantact ok";
         header('Location: ../views/contact.php');
     } catch(Exception $e) {
-        echo "Erreur: ". $e->getMessage();
+        $_SESSION['contact'] = "cantact error";
+        header('Location: ../views/contact.php');
+        // echo "Erreur: ". $e->getMessage();
     }
     exit;
 };

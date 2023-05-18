@@ -5,10 +5,9 @@ fetch("../../PHP/Controllers/spectacles.php", {
     .then((response) => response.json())
     .then((data) => {
         getDataSpectacles(data);
-        console.log(data);
     });
-console.log(localStorage);
 
+// Setting the functions to translate the static content of the page
 function setSpectaclesEspanol() {
     document.getElementById('spectacles_titre').innerHTML = 'Espectáculos';
     document.getElementById('btn_description_spectacle').innerHTML = 'Descripción';
@@ -23,12 +22,15 @@ function setSpectaclesFrancais() {
     document.getElementById('btn_contact_specetacle').innerHTML = 'Contact';
     document.getElementById('btn_retour_specetacle').innerHTML = 'Retour';
 };
+
+// Setting the lenguage according to the localStorage data
 if (localStorage.switch_class == 'switch esp') {
     setSpectaclesEspanol();
 } else {
     setSpectaclesFrancais();
 };
 
+// Observing the changes in the 'switch_language' class to translate the static content of the page
 const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -130,7 +132,8 @@ function getDataSpectacles(spectacles) {
             titre.textContent = spectacle.titre_spectacle;
             let p_description_spectacle = document.getElementById('p_description_spectacle');
             let p_comentaire_spectacle = document.getElementById('p_comentaire_spectacle');
-
+            
+            // Setting the description lenguage according to the localStorage data
             if (localStorage.switch_class == 'switch esp') {
                 p_description_spectacle.textContent = spectacle.description_spectacle.description_esp;
                 p_comentaire_spectacle.textContent = spectacle.site_spectacle.site_esp;
@@ -138,6 +141,8 @@ function getDataSpectacles(spectacles) {
                 p_description_spectacle.textContent = spectacle.description_spectacle.description_fr;
                 p_comentaire_spectacle.textContent = spectacle.site_spectacle.site_fr;
             };
+
+            // Observing the changes in the 'switch_language' class to translate the spectacle description
             const observer = new MutationObserver((mutationsList) => {
                 for (const mutation of mutationsList) {
                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -152,8 +157,8 @@ function getDataSpectacles(spectacles) {
                 };
             });
             observer.observe(switch_language, { attributes: true });
-            const spectacle_description = document.getElementById('spectacle_description');
 
+            const spectacle_description = document.getElementById('spectacle_description');
             const info_array = Object.entries(spectacle.info_spectacle);
             for (let i = 1; i < info_array.length + 1; i++) {
                 let new_info = spectacle_description.appendChild(document.createElement('p'));
@@ -161,12 +166,14 @@ function getDataSpectacles(spectacles) {
                 let new_titre = document.createElement('span');
                 new_titre.style.fontWeight = 'bold';
 
+                // Setting the info lenguage according to the localStorage data
                 if (localStorage.switch_class == 'switch esp') {
                     new_titre.textContent = `${spectacle.info_spectacle[i].titre_info_esp}: `;
                 } else {
                     new_titre.textContent = `${spectacle.info_spectacle[i].titre_info_fr}: `;
                 };
                 
+                // Observing the changes in the 'switch_language' class to translate the spectacle titre info
                 const observer = new MutationObserver((mutationsList) => {
                     for (const mutation of mutationsList) {
                         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -179,7 +186,7 @@ function getDataSpectacles(spectacles) {
                     };
                 });
                 observer.observe(switch_language, { attributes: true });
-                
+
                 new_info.appendChild(new_titre);
                 new_info.appendChild(document.createTextNode(spectacle.info_spectacle[i].contenue_info));
             };
