@@ -1,6 +1,19 @@
 <?php
 include('../models/connect.php');
 
+/* if (isset($_POST['description_esp']) && isset($_POST["description_fr"])) {
+    $description = array(
+        'description_fr' => ucfirst($_POST['description_fr']),
+        'description_esp' => ucfirst($_POST['description_esp'])
+    );
+    $description_json = json_encode($description);
+    $req = $bdd->prepare("INSERT INTO description_compagnie(presentation)
+                            VALUES (:presentation)");
+        $req->bindParam(':presentation', $description_json);
+        $req->execute();
+} */
+
+
 /* UPDATE REQUEST */
 if (isset($_POST["description_esp"]) && isset($_POST["description_fr"])) {
     $description = array(

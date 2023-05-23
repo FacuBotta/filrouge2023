@@ -2,7 +2,6 @@
 session_start();
 
 if (empty($_SESSION["user"])) {
-    echo 'está de bardo';
     session_destroy();
     header("Location: ./connexion.php");
 }
@@ -25,6 +24,7 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'images error') {
 }
 if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
     echo '<script> alert("Mis à jour effectué!"); </script>';
+    unset($_SESSION['message']);
 }
 ?>
 
@@ -51,6 +51,7 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
             <form id="delete_form" method="POST">
                 <input type="hidden" name="form_delete" value="1">
                 <input id="form_delete_file" type="hidden" name="file_delete">
+                <input id="form_delete_files" type="hidden" name="files_delete">
                 <input id="form_delete" type="hidden" name="id_delete">
                 <button type="submit">Supprimer</button>
             </form>
@@ -64,18 +65,15 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
                 <div>
                     <input type="hidden" name="form_update" value="1">
                     <input id="id_update_spectacle" type="hidden" name="id_spectacle">
-
                     <input id="titre_spectacle" name="new_titre_espectacle" type="text" placeholder="Titre"><br>
                     <textarea id="description_spectacle_fr" name="new_description_fr" placeholder="Description en français" cols="80" rows="15"></textarea><br>
                     <textarea id="site_spectacle_fr" name="new_site_fr" placeholder="Site en français" cols="80" rows="10"></textarea><br>
                     <textarea id="description_spectacle_esp" name="new_description_esp" placeholder="Descripcion en español" cols="80" rows="15"></textarea><br>
                     <textarea id="site_spectacle_esp" name="new_site_esp" placeholder="Sita en español" cols="80" rows="10"></textarea><br>
                 </div>
-                <div class="admin_form_infos" id="form_new_info">
+                <div class="admin_form_infos" id="form_info">
                     <h3>Informations</h3>
                     <button id="ajouter_new_info">Ajouter une Information</button>
-                    <!-- <button id="supprimer_new_info">Supprimer une Information</button> -->
-
                     <label for="new_files_spectacle">
                         <h3>Images:</h3>
                     </label>
@@ -112,13 +110,12 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
                     <textarea name="description_esp" placeholder="Descripcion en español" cols="80" rows="15"></textarea><br>
                     <textarea name="site_esp" placeholder="Sita en español" cols="80" rows="10"></textarea><br>
                 </div>
-                <div class="admin_form_infos" id="form_info">
+                <div class="admin_form_infos" id="form_new_info">
                     <h3>Informations</h3>
                     <button id="ajouter_info">Ajouter une Information</button>
                     <div id="infos_spectacle">
                         <!-- News info fields added from JS -->
                     </div>
-                    <button id="supprimer_info">Supprimer une Information</button>
                     <label for="files_spectacle">
                     <h3>Images:</h3>
                     </label>

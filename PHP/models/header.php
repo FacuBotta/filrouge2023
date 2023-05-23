@@ -12,8 +12,6 @@
                 <ul>
                     <li class="hidden_menu_items"><a id="menu_compagnie" href="la-compagnie.php">LA COMPAGNIE</a></li>
                     <li class="hidden_menu_items"><a id="menu_spectacles" href="spectacles.php">SPECTACLES</a></li>
-                    <!-- <li class="hidden_menu_items"><a id="menu_compagnie" href="action-culturelle.php">ACTION CULTURELE</a></li> -->
-                    <!-- <li class="hidden_menu_items"><a id="menu_compagnie" href="formations.php">FORMATIONS</a></li> -->
                     <li class="hidden_menu_items"><a id="menu_agenda" href="agenda.php">AGENDA</a></li>
                     <li class="hidden_menu_items"><a id="menu_don" href="#">FAIRE UN DON</a></li>
                     <li class="hidden_menu_items"><a id="menu_contact" href="contact.php">CONTACT</a></li>

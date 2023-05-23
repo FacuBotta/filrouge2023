@@ -28,10 +28,4 @@ if (isset($_SESSION['log_error'])) {
         </div>
     </div>
 </body>
-<script>
-    window.addEventListener("beforeunload", () => {
-        <?php session_unset();
-            session_destroy(); ?>
-    });
-</script>
 </html>

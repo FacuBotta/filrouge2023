@@ -16,53 +16,44 @@
         include_once('../models/header.php')
     ?>
     <div class="container_all container_all_image" style="background-image: url(../../SRL/fonds/spectacles-fond.jpg);">
-        <img class="logo" src="../../SRL/logo/logo-white.png">
+        <img class="logo" src="../../SRL/logo/logo-white.png" alt="Logo Acquaforte Theatre">
         <h2 id="spectacles_titre">Spectacles</h2>
         <div id="container_spectacle_cards" class="container_cards">
-            <!-- <div class="new_spectacle" style="background-image: url(../../SRL/afiches/afiche-escurial.png)">
-            </div> -->
+            <!-- Spectacle cards added from JavaScript -->
         </div>
     </div>
+
     <div id="new_spectacle_modal" class="spectacle_container_modal hidden_element">
         <div class="spectacle_head">
             <h1 id="spectacle_name"></h1>
             <div class="btns_slide_spectacles">
-                <a id="btn_description_spectacle">Description</a>
-                <a id="btn_photos_spectacle">Photos</a>
-                <a id="btn_videos_specetacle">Videos</a>
+                <button id="btn_description_spectacle" data-slide="-2">Description</button>
+                <button id="btn_photos_spectacle" data-slide="1">Photos</button>
+                <button id="btn_videos_specetacle" data-slide="2" >Videos</button>
                 <a id="btn_contact_specetacle" href="./contact.php">Contact</a>
                 <a id="btn_retour_specetacle" href="./spectacles.php">Retour</a>
             </div>
         </div>
         <div id="slider_container" class="slider_container">
             <div class="slider">
-                <div id="spectacle_description" class="slide spectacle_description">
+                <div id="spectacle_description" class="slide spectacle_description" data-slide="-2">
                     <h2>SYNOPSIS</h2>
-                    <p id="p_description_spectacle" class="p_description_spectacle"><!-- Un roi fou, enfermé avec son bouffon
-                        dans son palais décrépit, attend la mort d'une reine
-                        agonisante. Par jeu, par défi ou par pure cruauté, le roi impose au bouffon un jeu étrange :
-                        pour un temps, ils inverseront leurs attributs et leurs fonctions. Bon gré, mal gré, le
-                        bouffon s'exécute, mais il se prend au jeu et, au moment de restituer au roi son sceptre et
-                        sa couronne, il les garde et tente de conserver le pouvoir. --></p>
-                    <p id="p_comentaire_spectacle" class="p_comentaire_spectacle"><!-- « Ghelderode, c’est le diamant qui
-                        ferme le collier de poètes que la Belgique porte autour du
-                        cou. Ce diamant noir jette des feux cruels et nobles. Ils ne blessent que les petites âmes.
-                        Ils éblouissent les autres » Jean Cocteau --></p>
-                    <!-- <p>Titre: Escurial</p>
-                    <p>Auteur: Michel de Ghelderode</p>
-                    <p>Mise en scène: Facundo Melillo</p>
-                    <p>Assistante mise en scène: Naibi Esteban</p>
-                    <p>Distribution: Julien Assié, Jean Charles Jeantet, Facundo Melillo, Antoine Pelle, Naibi
-                        Esteban.</p>
-                    <p>Musique originale: Julien Assié, Facundo Melillo</p>
-                    <p>Masques et Costumes: Ana Melillo</p>
-                    <p>Création Lumière: Acquaforte Théâtre</p>
-                    <p>Technicienne Lumière: Naibi Esteban</p>
-                    <p>Teaser: Louise Priam</p>
-                    <p>Photographie: Paul Deruschi et Lucie Berquiere</p>
-                    <p>Durée: aprox. 1h, à partir de 10 ans</p> -->
+                    <p id="p_description_spectacle" class="p_description_spectacle"></p>
+                    <p id="p_comentaire_spectacle" class="p_comentaire_spectacle">
+                    <!-- <p id="info_nomSpectacle_1">
+                        <span style="font-weight: bold"> Titre: </span>
+                        "nom_spectacle"
+                    </p> -->
+                    <!-- <p id="info_nomSpectacle_2">
+                        <span style="font-weight: bold"> Titre: </span>
+                        "nom_spectacle"
+                    </p> -->
+                    <!-- <p id="info_nomSpectacle_3">
+                        <span style="font-weight: bold"> Titre: </span>
+                        "nom_spectacle"
+                    </p> -->
                 </div>
-                <div id="spectacle_images" class="slide spectacle_images slide_hidden">
+                <div id="spectacle_images" class="slide container_cards slide_hidden" data-slide="1">
                     <div class="container_modal">
                         <span class="btn_close" ><i class="material-symbols-rounded">close</i></span>
                         <div class="slide_modal">
@@ -72,12 +63,13 @@
                         </div>
                     </div>
                     <div class="container_images_spectacle" id="container_images">
-                        <!-- contenue inseree avec js depuis json -->
+                        <!-- contenue inseree avec js -->
                     </div>
                 </div>
-                <div id="spectacle_video" class="slide spectacle_video slide_hidden">
+                <div id="spectacle_video" class="slide spectacle_video slide_hidden" data-slide="2">
                     <iframe  title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                            gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
                 </div>
             </div>

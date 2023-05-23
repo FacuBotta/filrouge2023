@@ -1,7 +1,8 @@
 <?php
 include('../models/connect.php');
 /* INSERT REQUEST */
-if ( isset($_POST['form_add'])
+if (
+    isset($_POST['form_add'])
     && isset($_FILES['files_spectacle'])
     && isset($_FILES['affiche_spectacle'])
     && isset($_POST["titre_espectacle"])
@@ -38,10 +39,12 @@ if ( isset($_POST['form_add'])
         'site_esp' => ucfirst($_POST['site_esp'])
     );
     $info = array();
+    $counter = 0;
     foreach ($_POST as $key => $value) {
         if (strpos($key, 'contenue_info_') === 0) {
+            $counter++;
             $index = substr($key, 14);
-            $info[$index] = array(
+            $info[$counter] = array(
                 'titre_info_fr' => ucfirst($_POST['titre_info_fr_' . $index]),
                 'titre_info_esp' => ucfirst($_POST['titre_info_esp_' . $index]),
                 'contenue_info' => ucfirst($_POST['contenue_info_' . $index])
@@ -108,22 +111,24 @@ if ( isset($_POST['form_add'])
 if (!empty($_POST['form_delete'])) {
     $file_spectacle_affiche = $_POST['file_delete'];
     $id_spectacle = $_POST['id_delete'];
-
-    //Selecting the images's URL to the unlink function
-    $tab_spectacles_images = $bdd->query("SELECT images_spectacle FROM spectacles
-                                            WHERE id_spectacle = $id_spectacle")->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($tab_spectacles_images as &$image) {
-        $image = json_decode($image['images_spectacle']);
-        foreach ($image as $link_image) {
-            unlink($link_image);
+    $images = $_POST['files_delete'];
+    try {
+        $req = $bdd->prepare('DELETE FROM spectacles WHERE id_spectacle=:id_spectacle');
+        $req->bindParam(':id_spectacle', $_POST['id_delete']);
+        $req->execute();
+        $tab_spectacles_images = explode(',', $images);
+        foreach ($tab_spectacles_images as $image) {
+            unlink($image);
         };
+        unlink($file_spectacle_affiche);
+
+        $_SESSION['message'] = "deleted";
+        header('Location: ../views/admin.php');
+    } catch (Exception $e) {
+        $_SESSION['message'] = "add error";
+        header('Location: ../views/admin.php');
+        // die("Erreur:" . $e->getMessage());
     };
-    unlink($file_spectacle_affiche);
-    $req = $bdd->prepare('DELETE FROM spectacles WHERE id_spectacle=:id_spectacle');
-    $req->bindParam(':id_spectacle', $_POST['id_delete']);
-    $req->execute();
-    $_SESSION['message'] = "deleted";
-    header('Location: ../views/admin.php');
 }
 
 /* UPDATE REQUEST */
@@ -152,14 +157,14 @@ if (!empty($_POST['form_update'])) {
                 };
             };
         };
-        // Deleting old image if it not change
+
+        // Deleting old affiche
         if ($new_affiche != $_POST['old_affiche_spectacle']) {
             unlink($_POST['old_affiche_spectacle']);
         }
 
         $titre = ucwords($_POST['new_titre_espectacle']);
         $video = $_POST['new_video_spectacle'];
-
         $description = array(
             'description_fr' => ucfirst($_POST['new_description_fr']),
             'description_esp' => ucfirst($_POST['new_description_esp'])
@@ -168,19 +173,19 @@ if (!empty($_POST['form_update'])) {
             'site_fr' => ucfirst($_POST['new_site_fr']),
             'site_esp' => ucfirst($_POST['new_site_esp'])
         );
-
         $info = array();
+        $counter = 0;
         foreach ($_POST as $key => $value) {
             if (strpos($key, 'contenue_info_') === 0) {
+                $counter++;
                 $index = substr($key, 14);
-                $info[$index] = array(
+                $info[$counter] = array(
                     'titre_info_fr' => ucfirst($_POST['titre_info_fr_' . $index]),
                     'titre_info_esp' => ucfirst($_POST['titre_info_esp_' . $index]),
                     'contenue_info' => ucfirst($_POST['contenue_info_' . $index])
                 );
             };
         };
-
         $images = array();
 
         if (!empty($_FILES['new_files_spectacle']['name'][0])) {
@@ -201,7 +206,6 @@ if (!empty($_POST['form_update'])) {
                 } else {
                     $_SESSION['message'] = "images error";
                     header('Location: ../views/admin.php');
-                    // echo "<p> Extension ou taille incorrect </p>";
                 };
             };
         } else {

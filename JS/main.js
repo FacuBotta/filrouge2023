@@ -80,14 +80,13 @@ if(switch_language.classList.contains('esp')) {
 toogleLanguage = () => {
     if (switch_language.className == 'switch fr') {
         switch_language.classList.replace('fr', 'esp');
-        // Setting the indicator of the current lenguage
+        // Setting the indicator of the current lenguage in the buttom switch
         p_switch.textContent = 'E'
         localStorage.setItem('switch_class', switch_language.className);
         localStorage.setItem('switch_text', p_switch.textContent);
         setMenuEspanol();
     } else if (switch_language.className == 'switch esp') {
         switch_language.classList.replace('esp', 'fr');
-        // Setting the indicator of the current lenguage
         p_switch.textContent = 'F'
         localStorage.setItem('switch_class', switch_language.className);
         localStorage.setItem('switch_text', p_switch.textContent);

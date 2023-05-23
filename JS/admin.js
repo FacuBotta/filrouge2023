@@ -68,27 +68,29 @@ function getDataSpectacles(events) {
             hidden_div.style.opacity = 0;
             hidden_div.style.visibility = 'hidden';
         });
-        
+
         /* DELETE REQUEST */
         btn_delete.addEventListener('click', () => {
-            let modal_delete = document.getElementById('modal_delete');
-            let btn_close_delete = document.getElementById('btn_close_delete');
+            //Showing the form
+            const modal_delete = document.getElementById('modal_delete');
+            const btn_close_delete = document.getElementById('btn_close_delete');
             modal_delete.style.opacity = 1;
             modal_delete.style.visibility = 'visible';
 
-            // Seting action value to the delete form in ./views/admin.php
+            // Setting the action to the delete form in ./views/admin.php
             delete_form.setAttribute('action', '../Controllers/spectacles.php')
 
-            // Deleting the images of the spectacle
-            let form_delete = document.getElementById('form_delete');
-            let form_delete_file = document.getElementById('form_delete_file');
+            // Setting the values to the request
+            const form_delete = document.getElementById('form_delete');
+            const form_delete_file = document.getElementById('form_delete_file');
+            const form_delete_files = document.getElementById('form_delete_files');
             form_delete.setAttribute('value', `${spectacle.id_spectacle}`);
             form_delete_file.setAttribute('value', `${spectacle.affiche_spectacle}`);
-
+            form_delete_files.setAttribute('value', `${spectacle.images_spectacle}`);
             // Confirmation message
             let titre = document.getElementById('titre_delete');
-            titre.textContent = `Supprimer ${spectacle.titre_spectacle} du spectacles?`
-            // Close delete dialog 'cancel'
+            titre.textContent = `Supprimer ${spectacle.titre_spectacle} de spectacles?`
+            // Close delete form 'cancel'
             btn_close_delete.addEventListener('click', () => {
                 form_delete.setAttribute('value', '');
                 modal_delete.style.opacity = 0;
@@ -119,95 +121,25 @@ function getDataSpectacles(events) {
             document.getElementById('old_files_spectacle').setAttribute("value", spectacle.images_spectacle);
 
             // Creating an array from the infos
-            const info_array = Object.entries(spectacle.info_spectacle);
             const btn_ajouter_new_info = document.getElementById("ajouter_new_info");
-            for (let i = 1; i < info_array.length + 1; i++) {
-
-                // Creating a new field for each element of the array
-                const new_field_info = document.createElement("div");
-                new_field_info.classList.add("new_field_info");
-                new_field_info.setAttribute("id", "field_" + i);
-
-                // Setting the values of the information at position 'i' in the array
-                const input_titre_fr = document.createElement("input");
-                input_titre_fr.setAttribute("name", `titre_info_fr_${i}`);
-                input_titre_fr.setAttribute("value", `${spectacle.info_spectacle[i].titre_info_fr}`);
-                input_titre_fr.setAttribute("type", "text");
-                const input_titre_esp = document.createElement("input");
-                input_titre_esp.setAttribute("type", "text");
-                input_titre_esp.setAttribute("name", `titre_info_esp_${i}`);
-                input_titre_esp.setAttribute("value", `${spectacle.info_spectacle[i].titre_info_esp}`);
-                const input_contenue = document.createElement("input");
-                input_contenue.setAttribute("type", "text");
-                input_contenue.setAttribute("name", `contenue_info_${i}`);
-                input_contenue.setAttribute("value", `${spectacle.info_spectacle[i].contenue_info}`);
-
-                // Creating the button to delete the info field
-                const btn_supprimer_field = document.createElement("span");
-                btn_supprimer_field.setAttribute('class', 'material-symbols-rounded btn_supr_new_field');
-                btn_supprimer_field.innerHTML = 'delete';
-
-                // Adding the fields to the form
-                new_field_info.appendChild(input_titre_fr);
-                new_field_info.appendChild(input_titre_esp);
-                new_field_info.appendChild(input_contenue);
-                new_field_info.appendChild(btn_supprimer_field);
-                form_info.insertBefore(new_field_info, btn_ajouter_new_info.nextSibling);
-
-                // Setting the event of the delete button with the 'ID' value at position 'i'
-                btn_supprimer_field.addEventListener('click', () => {
-                    const field_to_del = document.getElementById(`field_${i}`);
-                    field_to_del.remove();
-                });
-            };
-
+            const form_info = document.getElementById('form_info');
+            const info_array = Object.entries(spectacle.info_spectacle);
             let new_field_count = info_array.length + 1;
+            let action = 'update';
+            for (let i = 1; i < info_array.length + 1; i++) {
+                infoFieldAdder(i, form_info, action, spectacle);
+            };
             btn_ajouter_new_info.addEventListener('click', (e) => {
                 e.preventDefault();
-                infoFieldAdder(new_field_count, btn_ajouter_new_info);
-                console.log(new_field_count);
-                /* const new_field_info = document.createElement("div");
-                new_field_info.classList.add("new_field_info");
-                new_field_info.setAttribute("id", "field_" + new_field_count);
-
-                const input_titre_fr = document.createElement("input");
-                input_titre_fr.setAttribute("type", "text");
-                input_titre_fr.setAttribute("name", `titre_info_fr_${new_field_count}`);
-                input_titre_fr.setAttribute("placeholder", "Titre Info Fr:");
-                
-                const input_titre_esp = document.createElement("input");
-                input_titre_esp.setAttribute("type", "text");
-                input_titre_esp.setAttribute("name", `titre_info_esp_${new_field_count}`);
-                input_titre_esp.setAttribute("placeholder", "Titre Info Esp:");
-
-                const input_contenue = document.createElement("input");
-                input_contenue.setAttribute("type", "text");
-                input_contenue.setAttribute("name", `contenue_info_${new_field_count}`);
-                input_contenue.setAttribute("placeholder", "Contenue Info");
-                
-                const btn_supprimer_field = document.createElement("span");
-                btn_supprimer_field.setAttribute('id', new_field_count);
-                btn_supprimer_field.setAttribute('class', 'material-symbols-rounded btn_supr_new_field');
-                btn_supprimer_field.innerHTML = 'delete';
-
-                new_field_info.appendChild(input_titre_fr);
-                new_field_info.appendChild(input_titre_esp);
-                new_field_info.appendChild(input_contenue);
-                new_field_info.appendChild(btn_supprimer_field);
-
-                form_info.insertBefore(new_field_info, btn_ajouter_new_info.nextSibling);
+                infoFieldAdder(new_field_count, form_info);
                 new_field_count++;
-                btn_supprimer_field.addEventListener('click', (e) => {
-                    const field_to_del = document.getElementById(`field_${e.target.id}`);
-                    field_to_del.remove();
-                }); */
             });
-            
         });
     });
 };
 
-function infoFieldAdder(counter, btn) {
+
+function infoFieldAdder(counter, container, action='', tab='null') {
     // Creating a new field container and its inputs
     const new_field_info = document.createElement("div");
     new_field_info.classList.add("new_field_info");
@@ -218,7 +150,7 @@ function infoFieldAdder(counter, btn) {
     // Setting the name attribute to handle it in the PHP controller
     input_titre_fr.setAttribute("name", `titre_info_fr_${counter}`);
     input_titre_fr.setAttribute("placeholder", "Titre Info Fr:");
-    
+
     const input_titre_esp = document.createElement("input");
     input_titre_esp.setAttribute("type", "text");
     input_titre_esp.setAttribute("name", `titre_info_esp_${counter}`);
@@ -228,27 +160,34 @@ function infoFieldAdder(counter, btn) {
     input_contenue.setAttribute("type", "text");
     input_contenue.setAttribute("name", `contenue_info_${counter}`);
     input_contenue.setAttribute("placeholder", "Contenue Info");
-    
+
     // Creating the button to delete the info field
     const btn_supprimer_field = document.createElement("span");
     btn_supprimer_field.setAttribute('id', counter);
     btn_supprimer_field.setAttribute('class', 'material-symbols-rounded btn_supr_new_field');
     btn_supprimer_field.innerHTML = 'delete';
 
+    if (action === 'update') {
+        input_titre_fr.setAttribute("value", `${tab.info_spectacle[counter].titre_info_fr}`);
+        input_titre_esp.setAttribute("value", `${tab.info_spectacle[counter].titre_info_esp}`);
+        input_contenue.setAttribute("value", `${tab.info_spectacle[counter].contenue_info}`);
+    };
+
     new_field_info.appendChild(input_titre_fr);
     new_field_info.appendChild(input_titre_esp);
     new_field_info.appendChild(input_contenue);
     new_field_info.appendChild(btn_supprimer_field);
 
-    form_info.insertBefore(new_field_info, btn.nextSibling);
-    
+    //inserting the new field into the reference container
+    const btn_ajouter_info = container.querySelector('button');
+    container.insertBefore(new_field_info, btn_ajouter_info.nextSibling);
+
     // Setting the button event to delete the info field
     btn_supprimer_field.addEventListener('click', (e) => {
         const field_to_del = document.getElementById(`field_${e.target.id}`);
         field_to_del.remove();
     });
-    return counter++; // ver que onda esto
-}
+};
 
 // Selecting the form to add spectacles in the DOM
 const btn_add_spectacle = document.getElementById('btn_add_spectacle');
@@ -267,61 +206,14 @@ btn_close_spectacle.addEventListener('click', () => {
 
 // Adding new field options to the form
 const btn_ajouter_info = document.getElementById("ajouter_info");
-const btn_supprimer_info = document.getElementById("supprimer_info");
-const form_info = document.getElementById("form_new_info");
-btn_supprimer_info.style.display = "none";
+const form_new_info = document.getElementById("form_new_info");
 //Counter fields
 let field_count = 1;
-btn_ajouter_info.addEventListener("click", function (event) {
-    event.preventDefault();
-    // Creating a new field container and its inputs
-    const new_field_info = document.createElement("div");
-    new_field_info.classList.add("new_field_info");
-    new_field_info.setAttribute("id", "field_" + field_count);
-
-    const input_titre_fr = document.createElement("input");
-    input_titre_fr.setAttribute("type", "text");
-    // Setting the name attribute to handle it in the PHP controller
-    input_titre_fr.setAttribute("name", `titre_info_fr_${field_count}`);
-    input_titre_fr.setAttribute("placeholder", "Titre Info Fr:");
-
-    const input_titre_esp = document.createElement("input");
-    input_titre_esp.setAttribute("type", "text");
-    input_titre_esp.setAttribute("name", `titre_info_esp_${field_count}`);
-    input_titre_esp.setAttribute("placeholder", "Titre Info Esp:");
-
-    const input_contenue = document.createElement("input");
-    input_contenue.setAttribute("type", "text");
-    input_contenue.setAttribute("name", `contenue_info_${field_count}`);
-    input_contenue.setAttribute("placeholder", "Contenue Info");
-
-    new_field_info.appendChild(input_titre_fr);
-    new_field_info.appendChild(input_titre_esp);
-    new_field_info.appendChild(input_contenue);
-
-    const infos_spectacles = document.getElementById('infos_spectacle');
-    infos_spectacles.appendChild(new_field_info);
+btn_ajouter_info.addEventListener('click', (e) => {
+    e.preventDefault();
+    infoFieldAdder(field_count, form_new_info);
     field_count++;
-    // Showing the button to delete a field only if there is any information
-    if (field_count > 1) {
-        btn_supprimer_info.style.display = "inline-block";
-    }
 });
-
-//Deleting an info field
-btn_supprimer_info.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (field_count > 1) {
-        const last_field_info = document.getElementById("field_" + (field_count - 1));
-        last_field_info.parentNode.removeChild(last_field_info);
-        field_count--;
-    }
-    if (field_count === 1) {
-        btn_supprimer_info.style.display = "none";
-    }
-});
-
-
 
 /* <<<<<AGENDA>>>>> */
 const btn_add_event = document.getElementById('btn_add_event');
@@ -403,6 +295,7 @@ function getDataAgenda(events) {
                 modal_delete.style.visibility = 'hidden';
             });
         });
+
         /* UPDATE REQUEST */
         btn_update.addEventListener('click', () => {
             const modal_update = document.getElementById('modal_update_agenda');
@@ -418,7 +311,7 @@ function getDataAgenda(events) {
             document.getElementById('adresse_num').setAttribute("value", `${date.adr_num_event}`);
             document.getElementById('adresse_rue').setAttribute("value", `${date.adr_rue_event}`);
             document.getElementById('adresse_ville').setAttribute("value", `${date.adr_ville_event}`);
-            
+
         });
     });
 };
