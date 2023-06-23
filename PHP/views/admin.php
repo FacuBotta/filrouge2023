@@ -1,11 +1,19 @@
 <?php
+$sessionDuration = 30 * 60;
 session_start();
+
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $sessionDuration)) {
+    session_unset();
+    session_destroy();
+    header("Location: connexion.php");
+    exit();
+}
+$_SESSION['last_activity'] = time();
 
 if (empty($_SESSION["user"])) {
     session_destroy();
     header("Location: ./connexion.php");
 }
-
 if (isset($_SESSION['message']) && $_SESSION['message'] == 'add ok') {
     echo '<script> alert("Addition réussi!"); </script>';
     unset($_SESSION['message']);
@@ -27,10 +35,8 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
     unset($_SESSION['message']);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,9 +46,7 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
     <link rel="stylesheet" href="../../CSS/styles.css">
     <title>Admin page</title>
 </head>
-
 <body class="admin_body">
-
     <!-- DELETE FORM -->
     <div id="modal_delete" class="container_modal">
         <div class="form_delete">
@@ -94,7 +98,6 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
             </form>
         </div>
     </div>
-
     <!-- <<<<ADD SPECTACLE>>>> -->
     <div id="modal_add_spectacle" class="container_modal">
         <span id="btn_close_spectacle" class="btn_close"><i class="material-symbols-rounded">close</i></span>
@@ -133,7 +136,6 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
             </form>
         </div>
     </div>
-
     <!-- <<<<ADD AGENDA EVENT>>>> -->
     <div id="modal_add_event" class="container_modal">
         <span id="btn_close_agenda" class="btn_close"><i class="material-symbols-rounded">close</i></span>
@@ -204,7 +206,6 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
             </form>
         </div>
     </div>
-
     <!-- <<<<UPDATE MEMBRE>>>> -->
     <div id="modal_update_membre" class="container_modal">
         <div id="form_membre" class="admin_form">
@@ -229,7 +230,6 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
             </form>
         </div>
     </div>
-
     <!-- <<<<ADD SOUTIEN>>>> -->
     <div id="modal_add_soutien" class="container_modal">
         <span id="btn_close_soutien" class="btn_close"><i class="material-symbols-rounded">close</i></span>
@@ -246,7 +246,6 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
             </form>
         </div>
     </div>
-
     <!-- <<<<UPDATE SOUTIEN>>>> -->
     <div id="modal_update_soutien" class="container_modal">
         <div id="form_soutien" class="admin_form">
@@ -267,7 +266,7 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
             </form>
         </div>
     </div>
-    <!-- <<>> -->
+    <!-- <<<< BODY >>>> -->
     <div class="container_all container_admin">
         <h1>Page Admin</h1>
         <div class="container_btns_admin">
@@ -318,6 +317,11 @@ if (isset($_SESSION['message']) && $_SESSION['message'] == 'update ok') {
         </div>
     </div>
     <script src="../../JS/admin.js"></script>
+    <script>
+        function destroySession() {
+            fetch('deconnexion.php', { method: 'POST'});
+        };
+        window.addEventListener('beforeunload', destroySession);
+    </script>
 </body>
-
 </html>

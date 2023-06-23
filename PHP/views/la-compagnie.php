@@ -15,7 +15,6 @@
         include_once('../models/header.php')
     ?>
     <div class="container_all container_slide">
-        <!-- <p id="language" class="francais hidden_element" >francais</p> -->
         <img class="logo" src="../../SRL/logo/logo-white.svg" alt="logo du la compagnie">
         <h2 id="compagnie_titre">Qui Sommes Nous</h2>
         <p id="compagnie_description"><!-- Association franco-argentine créée en 2017 par Facundo Melillo, comédien et metteur en scène argentin.
@@ -30,7 +29,7 @@
             de marionnettes, le traitement de l’espace par des jeux d’ombre et de lumière.
             Les auteurs de nos pièces traitent de sujets philosophiques, tragiques et/ou politiques. Nos spectacles
             s’adressent donc aux adultes et au jeune public. --></p>
-        <img class="btn_slide" src="../../SRL/icons/slide-btn.svg" alt="button slide">
+        <img class="btn_slide" src="../../SRL/icons/slide-btn.svg" alt="bouton ouvrir slide " tabindex="9">
     </div>
 
     <div id="container_equipe" class="container_all container_all_image hidden_element"
@@ -43,7 +42,7 @@
         <div id="cards_soutiens" class="container_cards">
             <!-- cards from fetch qui-sommes.js -->
         </div>
-        <img class="btn_slide_equipe" src="../../SRL/icons/slide-btn.svg" alt="">
+        <img class="btn_slide_equipe" src="../../SRL/icons/slide-btn.svg" alt="bouton fermer slide">
     </div>
     <?php
         include_once('../models/footer.php');

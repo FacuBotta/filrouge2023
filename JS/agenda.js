@@ -24,7 +24,6 @@ function getDataAgenda(events) {
         image_event.style.backgroundImage = `url(${date.image_event})`;
         const text_event = new_event.appendChild(document.createElement('div'));
         
-        // text_event.setAttribute('class', 'event_card_text'); //SIRVE?
         const titre_event = text_event.appendChild(document.createElement('h3'));
         titre_event.textContent = date.titre_event;
         const date_event = text_event.appendChild(document.createElement('p'));
@@ -70,25 +69,42 @@ function getDataAgenda(events) {
         adresse_event.href = `https://www.google.com/maps/search/${encodeURIComponent(adresse)}`;
         adresse_event.setAttribute('target', '_blank');
         adresse_event.setAttribute('class', 'adresse_link');
+        adresse_event.setAttribute('aria-label', `Lien adresse Google Maps pour le spectacle ${date.titre_event}`);
         adresse_event.textContent = adresse;
+        // More info link
         const link_espectacles = text_event.appendChild(document.createElement('a'));
         link_espectacles.setAttribute('href', 'spectacles.php');
+        link_espectacles.setAttribute('aria-label', 'Lire la suite. Lien vers page spectacles');
+        // Tooltip symbol
         const link_espectacles_symbol = link_espectacles.appendChild(document.createElement('span'));
         link_espectacles_symbol.setAttribute('class', 'material-symbols-rounded btn_event_card');
         link_espectacles_symbol.innerHTML = 'info';
-        
+        // Keyboard focus handler to 'more info' link
+        link_espectacles.addEventListener('focus', (e)=> {
+            e.preventDefault();
+            link_espectacles_symbol.style.scale = 1.3;
+            link_espectacles_symbol.style.color = 'black'
+        });
+        link_espectacles.addEventListener('focusout', (e)=> {
+            e.preventDefault();
+            link_espectacles_symbol.style.scale = 1;
+            link_espectacles_symbol.style.color = 'var(--active-color)';
+        });
+
+        // Tooltip link spectacles
         const tooltip_agenda = container_events.appendChild(document.createElement('span'));
         tooltip_agenda.innerHTML = 'Lire la suite';
         tooltip_agenda.setAttribute('class', 'tooltip_agenda');
-        link_espectacles_symbol.addEventListener('mousemove', (e) => {
+        function showTooltip(e) {
             tooltip_agenda.style.top = `${e.clientY - 35}px`;
             tooltip_agenda.style.left = `${e.clientX}px`;
             tooltip_agenda.style.visibility = 'visible';
             tooltip_agenda.style.opacity = 1;
-        });
-        link_espectacles_symbol.addEventListener('mouseleave', ()=> {
-            tooltip_agenda.style.visibility = 'hidden';
-            tooltip_agenda.style.opacity = 0;
-        });
+            link_espectacles_symbol.addEventListener('mouseleave', ()=> {
+                tooltip_agenda.style.visibility = 'hidden';
+                tooltip_agenda.style.opacity = 0;
+            });
+        };
+        link_espectacles_symbol.addEventListener('mousemove', (e) => showTooltip(e));
     });
 };

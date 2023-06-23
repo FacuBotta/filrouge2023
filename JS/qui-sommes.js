@@ -36,7 +36,6 @@ function setEquipeFrancais() {
 // Setting the description company content according the data base info
 const compagnie_description = document.getElementById('compagnie_description');
 function getDataDescription(description) {
-    // console.log(description);
     // Recovering the json data from the description array
     const presentation = JSON.parse(description[0].presentation);
 
@@ -67,24 +66,11 @@ function getDataDescription(description) {
     observer.observe(switch_language, { attributes: true });
 };
 
-// Setting the 'Soutiens' content
-const cards_equipe = document.getElementById('cards_equipe');
-const cards_soutiens = document.getElementById('cards_soutiens');
-function getDataSoutien(soutiens) {
-    soutiens.forEach(soutien => {
-        const link_soutien = cards_soutiens.appendChild(document.createElement("a"));
-        link_soutien.setAttribute('href', soutien.lien_coll);
-        link_soutien.setAttribute('target', '_blank');
-        const soutien_card = link_soutien.appendChild(document.createElement("div"));
-        soutien_card.setAttribute("class", "soutien");
-        soutien_card.setAttribute("alt", `image de notre collaborateur ${soutien.nom_coll}`);
-        soutien_card.style.backgroundImage = `url(${soutien.image_coll})`;
-    });
-};
-
 // Setting the 'Membres' content
+var tabindex = 10;
 function getDataMembres(membre) {
     membre.forEach((membre, i) => {
+        tabindex += i;
         const person_card = cards_equipe.appendChild(document.createElement("div"));
         person_card.setAttribute("class", "person_card");
         const block_person_card = person_card.appendChild(document.createElement("div"));
@@ -92,6 +78,7 @@ function getDataMembres(membre) {
         block_person_card.setAttribute("id", `block_person_card_${i}`);
         const person_image = block_person_card.appendChild(document.createElement("div"));
         person_image.setAttribute("class", "person_card_image");
+        person_image.setAttribute("tabindex", tabindex);
         person_image.setAttribute("alt", `image du membre ${membre.nom_membre}`);
         person_image.style.backgroundImage = `url(${membre.image_membre})`;
         const person_card_CV = block_person_card.appendChild(document.createElement("div"));
@@ -135,12 +122,39 @@ function getDataMembres(membre) {
         });
         observer.observe(switch_language, { attributes: true });
 
-        // Showing the modal of the clicked member
-        person_image.addEventListener('click', () => {
+        function toggleMembreCard() {
             block_person_card.classList.toggle("block_person_card_active");
             person_card_CV.classList.toggle("hidden_element");
             block_text_card.classList.toggle("hidden_element");
+        };
+        // Showing the modal of the clicked member
+        person_image.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleMembreCard()
         });
+        person_image.addEventListener('keydown', (e) => {
+            if (e.keyCode === 13 || e.keyCode === 32) {
+                e.preventDefault();
+                toggleMembreCard();
+            };
+        });
+    });
+};
+
+// Setting the 'Soutiens' content
+const cards_equipe = document.getElementById('cards_equipe');
+const cards_soutiens = document.getElementById('cards_soutiens');
+function getDataSoutien(soutiens) {
+    soutiens.forEach((soutien, i) => {
+        tabindex += i + 1;
+        const link_soutien = cards_soutiens.appendChild(document.createElement("a"));
+        link_soutien.setAttribute('href', soutien.lien_coll);
+        link_soutien.setAttribute('target', '_blank');
+        link_soutien.setAttribute("tabindex", tabindex);
+        const soutien_card = link_soutien.appendChild(document.createElement("div"));
+        soutien_card.setAttribute("class", "soutien");
+        soutien_card.setAttribute("alt", `image de notre collaborateur ${soutien.nom_coll}`);
+        soutien_card.style.backgroundImage = `url(${soutien.image_coll})`;
     });
 };
 
@@ -148,7 +162,22 @@ function getDataMembres(membre) {
 const container_slide = document.querySelector('.container_slide');
 const container_equipe = document.getElementById('container_equipe');
 document.querySelector('.btn_slide').addEventListener('click', slideScreen);
+document.querySelector('.btn_slide').addEventListener('keydown', (e) => {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+        e.preventDefault();
+        slideScreen();
+    };
+});
+document.querySelector('.btn_slide_equipe').setAttribute('tabindex', tabindex + 1)
 document.querySelector('.btn_slide_equipe').addEventListener('click', slideScreenEquipe);
+document.querySelector('.btn_slide_equipe').addEventListener('keydown', (e) => {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+        document.querySelector('.container_header .logo a').focus();
+        document.querySelector('.container_header .logo a').setAttribute('tabindex', 1);
+        e.preventDefault();
+        slideScreenEquipe();
+    };
+});
 // Function to hide the description slide
 function slideScreen() {
     container_slide.classList.toggle("active_container_slide");

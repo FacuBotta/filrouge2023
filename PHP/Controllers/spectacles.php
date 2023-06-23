@@ -224,7 +224,6 @@ if (!empty($_POST['form_update'])) {
                         description_spectacle=:description_spectacle, 
                         site_spectacle=:site_spectacle,
                         info_spectacle=:info_spectacle,
-                        site_spectacle=:site_spectacle,
                         affiche_spectacle=:affiche_spectacle,
                         images_spectacle=:images_spectacle,
                         video_spectacle=:video_spectacle';
@@ -243,9 +242,9 @@ if (!empty($_POST['form_update'])) {
             $_SESSION['message'] = "update ok";
             header('Location: ../views/admin.php');
         } catch (Exception $e) {
-            $_SESSION['message'] = "add error";
-            header('Location: ../views/admin.php');
-            // die("Erreur:" . $e->getMessage());
+            // $_SESSION['message'] = "add error";
+            // header('Location: ../views/admin.php');
+            die("Erreur:" . $e->getMessage());
         };
     };
 };

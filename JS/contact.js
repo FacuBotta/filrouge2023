@@ -54,7 +54,6 @@ if (document.getElementById('contact_alert') != null) {
 };
 
 // Translation of the contact page
-
 function setContactEspanol() {
     document.getElementById('contact_titre').textContent = 'Contacto';
     document.getElementById('contact_nom').setAttribute('placeholder', 'Nombre');

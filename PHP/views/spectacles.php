@@ -16,7 +16,7 @@
         include_once('../models/header.php')
     ?>
     <div class="container_all container_all_image" style="background-image: url(../../SRL/fonds/spectacles-fond.jpg);">
-        <img class="logo" src="../../SRL/logo/logo-white.png" alt="Logo Acquaforte Theatre">
+        <img class="logo" src="../../SRL/logo/logo-white.svg" alt="Logo Acquaforte Theatre">
         <h2 id="spectacles_titre">Spectacles</h2>
         <div id="container_spectacle_cards" class="container_cards">
             <!-- Spectacle cards added from JavaScript -->
@@ -27,11 +27,11 @@
         <div class="spectacle_head">
             <h1 id="spectacle_name"></h1>
             <div class="btns_slide_spectacles">
-                <button id="btn_description_spectacle" data-slide="-2">Description</button>
-                <button id="btn_photos_spectacle" data-slide="1">Photos</button>
-                <button id="btn_videos_specetacle" data-slide="2" >Videos</button>
-                <a id="btn_contact_specetacle" href="./contact.php">Contact</a>
-                <a id="btn_retour_specetacle" href="./spectacles.php">Retour</a>
+                <button id="btn_description_spectacle" data-slide="-2" aria-label="Bouton description spectacle">Description</button>
+                <button id="btn_photos_spectacle" data-slide="1" aria-label="Bouton photos spectacle">Photos</button>
+                <button id="btn_videos_specetacle" data-slide="2" aria-label="Bouton videos spectacle">Videos</button>
+                <a id="btn_contact_specetacle" href="./contact.php" aria-label="Bouton page contact">Contact</a>
+                <a id="btn_retour_specetacle" href="./spectacles.php" aria-label="Bouton retour page spectacles">Retour</a>
             </div>
         </div>
         <div id="slider_container" class="slider_container">
@@ -57,9 +57,9 @@
                     <div class="container_modal">
                         <span class="btn_close" ><i class="material-symbols-rounded">close</i></span>
                         <div class="slide_modal">
-                            <div class="btn_slide_modal btn_prev"><i id="btn_prev" class="material-symbols-rounded">arrow_back_ios</i></div>
-                            <div class="btn_slide_modal btn_next"><i id="btn_next" class="material-symbols-rounded">arrow_forward_ios</i></div>
-                            <img id="slide_modal_image" src="" alt="">
+                            <div class="btn_slide_modal btn_prev"><i id="btn_prev" class="material-symbols-rounded" aria-label="Bouton image precedent">arrow_back_ios</i></div>
+                            <div class="btn_slide_modal btn_next"><i id="btn_next" class="material-symbols-rounded" aria-label="Bouton image suivante">arrow_forward_ios</i></div>
+                            <img id="slide_modal_image" src="" alt="Image du carousel">
                         </div>
                     </div>
                     <div class="container_images_spectacle" id="container_images">

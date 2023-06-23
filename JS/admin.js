@@ -9,7 +9,6 @@ fetch("../../PHP/Controllers/description.php", {
 
 function getDataDescription(description) {
     const presentation = JSON.parse(description[0].presentation);
-    // console.log(presentation);
     const btn_description = document.getElementById('btn_description');
     const form_description = document.getElementById('form_description');
     btn_description.addEventListener('click', () => {
@@ -19,7 +18,6 @@ function getDataDescription(description) {
 
     });
 };
-
 /* <<<<<SPECTACLES>>>>> */
 fetch("../../PHP/Controllers/spectacles.php", {
     method: "POST"
@@ -29,17 +27,20 @@ fetch("../../PHP/Controllers/spectacles.php", {
         getDataSpectacles(data);
     });
 
-
-/* function getDataSpectacles(spectacles) {
-    console.log(spectacles);
-}
- */
-
+// Function to open or close modal elements
+function handleVisivility(element) {
+    if (element.style.opacity == 0) {
+        element.style.opacity = 1;
+        element.style.visibility = 'visible';
+    } else {
+        element.style.opacity = 0;
+        element.style.visibility = 'hidden';
+    };
+};
 
 const container_spectacles = document.getElementById('admin_spectacles');
-
-function getDataSpectacles(events) {
-    events.forEach(spectacle => {
+function getDataSpectacles(spectacles) {
+    spectacles.forEach(spectacle => {
         const event_box = container_spectacles.appendChild(document.createElement('div'));
         event_box.setAttribute('class', 'admin_item');
         event_box.setAttribute('id', `${spectacle.id_spectacle}`);
@@ -60,13 +61,11 @@ function getDataSpectacles(events) {
 
         event_box.addEventListener('mouseenter', (e) => {
             e.preventDefault();
-            hidden_div.style.opacity = 1;
-            hidden_div.style.visibility = 'visible';
+            handleVisivility(hidden_div);
         });
         event_box.addEventListener('mouseleave', (e) => {
             e.preventDefault();
-            hidden_div.style.opacity = 0;
-            hidden_div.style.visibility = 'hidden';
+            handleVisivility(hidden_div);
         });
 
         /* DELETE REQUEST */
@@ -74,8 +73,7 @@ function getDataSpectacles(events) {
             //Showing the form
             const modal_delete = document.getElementById('modal_delete');
             const btn_close_delete = document.getElementById('btn_close_delete');
-            modal_delete.style.opacity = 1;
-            modal_delete.style.visibility = 'visible';
+            handleVisivility(modal_delete);
 
             // Setting the action to the delete form in ./views/admin.php
             delete_form.setAttribute('action', '../Controllers/spectacles.php')
@@ -93,8 +91,7 @@ function getDataSpectacles(events) {
             // Close delete form 'cancel'
             btn_close_delete.addEventListener('click', () => {
                 form_delete.setAttribute('value', '');
-                modal_delete.style.opacity = 0;
-                modal_delete.style.visibility = 'hidden';
+                handleVisivility(modal_delete);
             });
         });
 
@@ -102,8 +99,7 @@ function getDataSpectacles(events) {
         // Showing the update form after click
         btn_update.addEventListener('click', () => {
             const modal_update = document.getElementById('modal_update_spectacle');
-            modal_update.style.opacity = 1;
-            modal_update.style.visibility = 'visible';
+            handleVisivility(modal_update);
 
             // Setting the value of form_update to handle it in the PHP controller
             // This value will be used as a condition in the update request to take the correct 'spectacle'
@@ -137,7 +133,6 @@ function getDataSpectacles(events) {
         });
     });
 };
-
 
 function infoFieldAdder(counter, container, action='', tab='null') {
     // Creating a new field container and its inputs
@@ -194,15 +189,8 @@ const btn_add_spectacle = document.getElementById('btn_add_spectacle');
 const modal_add_spectacle = document.getElementById('modal_add_spectacle');
 const btn_close_spectacle = document.getElementById('btn_close_spectacle');
 // buttons events
-btn_add_spectacle.addEventListener('click', () => {
-    modal_add_spectacle.style.opacity = 1;
-    modal_add_spectacle.style.visibility = 'visible';
-});
-btn_close_spectacle.addEventListener('click', () => {
-    modal_add_spectacle.style.opacity = 0;
-    modal_add_spectacle.style.visibility = 'hidden';
-});
-
+btn_add_spectacle.addEventListener('click', handleVisivility(modal_add_spectacle));
+btn_close_spectacle.addEventListener('click', handleVisivility(modal_add_spectacle));
 
 // Adding new field options to the form
 const btn_ajouter_info = document.getElementById("ajouter_info");
@@ -221,14 +209,8 @@ const modal_add_event = document.getElementById('modal_add_event');
 const btn_close_agenda = document.getElementById('btn_close_agenda');
 const container_agenda = document.getElementById('admin_agenda');
 
-btn_add_event.addEventListener('click', () => {
-    modal_add_event.style.opacity = 1;
-    modal_add_event.style.visibility = 'visible';
-});
-btn_close_agenda.addEventListener('click', () => {
-    modal_add_event.style.opacity = 0;
-    modal_add_event.style.visibility = 'hidden';
-});
+btn_add_event.addEventListener('click', handleVisivility(modal_add_event));
+btn_close_agenda.addEventListener('click', handleVisivility(modal_add_event));
 
 fetch("../../PHP/Controllers/agenda.php", {
     method: "POST"
@@ -259,13 +241,11 @@ function getDataAgenda(events) {
 
         event_box.addEventListener('mouseenter', (e) => {
             e.preventDefault();
-            hidden_div.style.opacity = 1;
-            hidden_div.style.visibility = 'visible';
+            handleVisivility(hidden_div);
         });
         event_box.addEventListener('mouseleave', (e) => {
             e.preventDefault();
-            hidden_div.style.opacity = 0;
-            hidden_div.style.visibility = 'hidden';
+            handleVisivility(hidden_div);
         });
 
         /* DELETE REQUEST */
@@ -273,8 +253,7 @@ function getDataAgenda(events) {
             console.log(date);
             let modal_delete = document.getElementById('modal_delete');
             let btn_close_delete = document.getElementById('btn_close_delete');
-            modal_delete.style.opacity = 1;
-            modal_delete.style.visibility = 'visible';
+            handleVisivility(modal_delete);
 
             // Seting action value to the delete form in ./views/admin.php
             delete_form.setAttribute('action', '../Controllers/agenda.php')
@@ -291,16 +270,14 @@ function getDataAgenda(events) {
             // Close delete dialog 'cancel'
             btn_close_delete.addEventListener('click', () => {
                 form_delete.setAttribute('value', '');
-                modal_delete.style.opacity = 0;
-                modal_delete.style.visibility = 'hidden';
+                handleVisivility(modal_delete);
             });
         });
 
         /* UPDATE REQUEST */
         btn_update.addEventListener('click', () => {
             const modal_update = document.getElementById('modal_update_agenda');
-            modal_update.style.opacity = 1;
-            modal_update.style.visibility = 'visible';
+            handleVisivility(modal_update);
 
             const form_update = document.getElementById('id_update_agenda');
             form_update.setAttribute('value', `${date.id_event}`);
@@ -325,15 +302,8 @@ const btn_close_membre = document.getElementById('btn_close_membre');
 const container_membres = document.getElementById('admin_membres');
 const delete_form = document.getElementById('delete_form');
 
-btn_add_membre.addEventListener('click', () => {
-    modal_add_membre.style.opacity = 1;
-    modal_add_membre.style.visibility = 'visible';
-});
-btn_close_membre.addEventListener('click', () => {
-    modal_add_membre.style.opacity = 0;
-    modal_add_membre.style.visibility = 'hidden';
-});
-
+btn_add_membre.addEventListener('click', handleVisivility(modal_add_membre));
+btn_close_membre.addEventListener('click', handleVisivility(modal_add_membre));
 
 fetch("../../PHP/Controllers/equipe.php", {
     method: "POST"
@@ -365,21 +335,18 @@ function getDataMembre(membres) {
 
         membre_box.addEventListener('mouseenter', (e) => {
             e.preventDefault();
-            hidden_div.style.opacity = 1;
-            hidden_div.style.visibility = 'visible';
+            handleVisivility(hidden_div);
         });
         membre_box.addEventListener('mouseleave', (e) => {
             e.preventDefault();
-            hidden_div.style.opacity = 0;
-            hidden_div.style.visibility = 'hidden';
+            handleVisivility(hidden_div);
         });
         /* DELETE REQUEST */
         btn_delete.addEventListener('click', () => {
             console.log(membre.description_membre);
             let modal_delete = document.getElementById('modal_delete');
             let btn_close_delete = document.getElementById('btn_close_delete');
-            modal_delete.style.opacity = 1;
-            modal_delete.style.visibility = 'visible';
+            handleVisivility(modal_delete);
 
             // Seting action value to the delete form in views/admin.php
             delete_form.setAttribute('action', '../Controllers/equipe.php')
@@ -396,15 +363,14 @@ function getDataMembre(membres) {
             // Close delete dialog 'cancel'
             btn_close_delete.addEventListener('click', () => {
                 form_delete.setAttribute('value', '');
-                modal_delete.style.opacity = 0;
-                modal_delete.style.visibility = 'hidden';
+                handleVisivility(modal_delete);
             });
         });
         /* UPDATE REQUEST */
         btn_update.addEventListener('click', () => {
             let modal_update = document.getElementById('modal_update_membre');
-            modal_update.style.opacity = 1;
-            modal_update.style.visibility = 'visible';
+            handleVisivility(modal_update);
+
             let form_update = document.getElementById('id_update');
             form_update.setAttribute('value', `${membre.id_membre}`);
             document.getElementById('nom_membre').setAttribute("value", `${membre.nom_membre}`);
@@ -425,14 +391,8 @@ let modal_add_soutien = document.getElementById('modal_add_soutien');
 let btn_close_soutien = document.getElementById('btn_close_soutien');
 const container_soutiens = document.getElementById('admin_soutiens');
 
-btn_add_soutien.addEventListener('click', () => {
-    modal_add_soutien.style.opacity = 1;
-    modal_add_soutien.style.visibility = 'visible';
-});
-btn_close_soutien.addEventListener('click', () => {
-    modal_add_soutien.style.opacity = 0;
-    modal_add_soutien.style.visibility = 'hidden';
-});
+btn_add_soutien.addEventListener('click',handleVisivility(modal_add_soutien));
+btn_close_soutien.addEventListener('click',handleVisivility(modal_add_soutien));
 
 fetch("../../PHP/Controllers/soutiens.php", {
     method: "POST"
@@ -443,9 +403,7 @@ fetch("../../PHP/Controllers/soutiens.php", {
     });
 
 function getDataSoutien(soutiens) {
-
     soutiens.forEach(soutien => {
-        // console.log(soutien);
         const soutien_box = container_soutiens.appendChild(document.createElement('div'));
         soutien_box.setAttribute('class', 'admin_item');
         soutien_box.setAttribute('id', `${soutien.id_coll}`);
@@ -466,21 +424,19 @@ function getDataSoutien(soutiens) {
 
         soutien_box.addEventListener('mouseenter', (e) => {
             e.preventDefault();
-            hidden_div.style.opacity = 1;
-            hidden_div.style.visibility = 'visible';
+            handleVisivility(hidden_div);
         });
         soutien_box.addEventListener('mouseleave', (e) => {
             e.preventDefault();
-            hidden_div.style.opacity = 0;
-            hidden_div.style.visibility = 'hidden';
+            handleVisivility(hidden_div);
         });
 
         /* DELETE REQUEST */
         btn_delete.addEventListener('click', () => {
             let modal_delete = document.getElementById('modal_delete');
             let btn_close_delete = document.getElementById('btn_close_delete');
-            modal_delete.style.opacity = 1;
-            modal_delete.style.visibility = 'visible';
+            handleVisivility(modal_delete);
+
             // Seting action value to the delete form in views/admin.php
             delete_form.setAttribute('action', '../Controllers/soutiens.php')
 
@@ -496,16 +452,14 @@ function getDataSoutien(soutiens) {
             // Close delete dialog 'cancel'
             btn_close_delete.addEventListener('click', () => {
                 form_delete.setAttribute('value', '');
-                modal_delete.style.opacity = 0;
-                modal_delete.style.visibility = 'hidden';
+                handleVisivility(modal_delete);
             });
         });
 
         /* UPDATE REQUEST */
         btn_update.addEventListener('click', () => {
             let modal_update = document.getElementById('modal_update_soutien');
-            modal_update.style.opacity = 1;
-            modal_update.style.visibility = 'visible';
+            handleVisivility(modal_update);
 
             let form_update = document.getElementById('id_update_coll');
             form_update.setAttribute('value', `${soutien.id_coll}`);
@@ -514,4 +468,4 @@ function getDataSoutien(soutiens) {
             document.getElementById('old_image_coll').setAttribute("value", `${soutien.image_coll}`);
         });
     });
-}
+};

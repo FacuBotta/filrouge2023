@@ -2,34 +2,53 @@
 let burguer_menu = document.getElementById('bars_menu');
 let li_nav_menu = document.querySelectorAll('nav.hidden_nav_menu li');
 let nav_menu = document.getElementById('nav_menu');
-
 // Function to the toogle and replace of the classes of the burguer menu
-toogleMenu = () => {
+toggleMenu = () => {
     // Toogle the classe for the three lines of the symbol menu
     document.querySelector('.line1_bars_menu').classList.toggle('activeline1_bars_menu');
     document.querySelector('.line2_bars_menu').classList.toggle('activeline2_bars_menu');
     document.querySelector('.line3_bars_menu').classList.toggle('activeline3_bars_menu');
     // Replacing the classe of the container's items menu
     if (nav_menu.className === 'hidden_nav_menu') {
-        nav_menu.classList.replace('hidden_nav_menu', 'active_nav_menu')
+        nav_menu.classList.replace('hidden_nav_menu', 'active_nav_menu');
     } else if (nav_menu.className === 'active_nav_menu') {
-        nav_menu.classList.replace('active_nav_menu', 'hidden_nav_menu')
+        nav_menu.classList.replace('active_nav_menu', 'hidden_nav_menu');
     };
     // Replacing the classes of each menu item
+    // Setting the 'tabindex' behavior
     li_nav_menu.forEach((li_item, i) => {
         if (li_item.className === 'hidden_menu_items') {
             li_item.classList.replace('hidden_menu_items', `active_menu_item_${i++}`);
+            li_item.firstChild.setAttribute('tabindex', i + 4);
         } else if (li_item.className != `hidden_menu_items`) {
             li_item.classList.replace(`active_menu_item_${i++}`, 'hidden_menu_items');
+            li_item.firstChild.setAttribute('tabindex', -1);
         };
     });
-}
+};
 // Trigger to open and close the menu
-burguer_menu.addEventListener('click', toogleMenu);
-// Trigger to close the menu when the click is out the it
+burguer_menu.addEventListener('click', toggleMenu);
+//Trigger to open and close the menu with the 'Enter' and 'Space' keys
+burguer_menu.addEventListener('keydown', (e) => {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+        e.preventDefault();
+        toggleMenu();
+    };
+});
+//Trigger to close the menu with the 'scape' key
+document.addEventListener('keydown', (e) => {
+    if (nav_menu.className != 'hidden_nav_menu') {
+        if (e.keyCode === 27) {
+            e.preventDefault();
+            toggleMenu();
+        };
+    }
+})
+// Trigger to close the menu when the click is outside of it
 document.onclick = (e) => {
-    if (!burguer_menu.contains(e.target) && nav_menu.className != 'hidden_nav_menu') {
-        toogleMenu();
+    if (!burguer_menu.contains(e.target)
+        && nav_menu.className != 'hidden_nav_menu') {
+            toggleMenu();
     };
 };
 
@@ -94,4 +113,12 @@ toogleLanguage = () => {
     };
 };
 // The trigger to translate all pages
-switch_language_btn.forEach(btn => btn.addEventListener('click', toogleLanguage));
+switch_language_btn.forEach(btn => {
+    btn.addEventListener('click', toogleLanguage)
+    btn.addEventListener('keydown', (e) => {
+        if (e.keyCode === 13 || e.keyCode === 32) {
+            e.preventDefault();
+            toogleLanguage();
+        }
+    })
+});

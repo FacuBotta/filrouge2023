@@ -2,6 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 require '../../vendor/autoload.php';
 $mail = new PHPMailer(true);
+session_start();
 // Paramètres du serveur
 $mail->isSMTP();
 $mail->SMTPDebug = 0;

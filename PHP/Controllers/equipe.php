@@ -39,9 +39,9 @@ if (isset($_FILES['image_membre']) && isset($_POST["nom_membre"]) && isset($_POS
         $_SESSION['message'] = "add ok";
         header('Location: ../views/admin.php');
     } catch (Exception $e) {
-        // $_SESSION['message'] = "add error";
-        // header('Location: ../views/admin.php');
-        die("Erreur:" . $e->getMessage());
+        $_SESSION['message'] = "add error";
+        header('Location: ../views/admin.php');
+        // die("Erreur:" . $e->getMessage());
     }
 }
 
