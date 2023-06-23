@@ -11,7 +11,7 @@ if (isset($_FILES['image_soutien']) && isset($_POST["nom_soutien"]) && isset($_P
         $ext = substr(strrchr($_FILES['image_soutien']['name'], '.'), 1);
         if (isset($_POST['nom_soutien'])) {
             $new_fileName = str_replace(' ', '', $_POST['nom_soutien']);
-            $image = "../../SRL/soutiens/" . $new_fileName . ".$ext";
+            $image = "../SRL/soutiens/" . $new_fileName . ".$ext";
             move_uploaded_file($_FILES['image_soutien']['tmp_name'], $image);
         }
     }
@@ -59,7 +59,7 @@ if (!empty($_POST['form_update'])) {
                 $ext = substr(strrchr($_FILES['new_image_coll']['name'], '.'), 1);
                 if (isset($_POST['nom_coll'])) {
                     $new_fileName = str_replace(' ', '', $_POST['nom_coll']);
-                    $new_image = "../../SRL/soutiens/" . $new_fileName . ".$ext";
+                    $new_image = "../SRL/soutiens/" . $new_fileName . ".$ext";
                     move_uploaded_file($_FILES['new_image_coll']['tmp_name'], $new_image);
                 }
             }

@@ -1,5 +1,5 @@
 /* <<<<<DESCRIPTION>>>>> */
-fetch("../../PHP/Controllers/description.php", {
+fetch("../Controllers/description.php", {
     method: "POST"
 })
     .then((response) => response.json())
@@ -19,7 +19,7 @@ function getDataDescription(description) {
     });
 };
 /* <<<<<SPECTACLES>>>>> */
-fetch("../../PHP/Controllers/spectacles.php", {
+fetch("../Controllers/spectacles.php", {
     method: "POST"
 })
     .then((response) => response.json())
@@ -189,8 +189,15 @@ const btn_add_spectacle = document.getElementById('btn_add_spectacle');
 const modal_add_spectacle = document.getElementById('modal_add_spectacle');
 const btn_close_spectacle = document.getElementById('btn_close_spectacle');
 // buttons events
-btn_add_spectacle.addEventListener('click', handleVisivility(modal_add_spectacle));
-btn_close_spectacle.addEventListener('click', handleVisivility(modal_add_spectacle));
+btn_add_spectacle.addEventListener('click', (e)=> {
+    e.preventDefault();
+    handleVisivility(modal_add_spectacle);
+});
+
+btn_close_spectacle.addEventListener('click', (e)=> {
+    e.preventDefault();
+    handleVisivility(modal_add_spectacle);
+});
 
 // Adding new field options to the form
 const btn_ajouter_info = document.getElementById("ajouter_info");
@@ -212,7 +219,7 @@ const container_agenda = document.getElementById('admin_agenda');
 btn_add_event.addEventListener('click', handleVisivility(modal_add_event));
 btn_close_agenda.addEventListener('click', handleVisivility(modal_add_event));
 
-fetch("../../PHP/Controllers/agenda.php", {
+fetch("../Controllers/agenda.php", {
     method: "POST"
 })
     .then((response) => response.json())
@@ -250,7 +257,6 @@ function getDataAgenda(events) {
 
         /* DELETE REQUEST */
         btn_delete.addEventListener('click', () => {
-            console.log(date);
             let modal_delete = document.getElementById('modal_delete');
             let btn_close_delete = document.getElementById('btn_close_delete');
             handleVisivility(modal_delete);
@@ -305,7 +311,7 @@ const delete_form = document.getElementById('delete_form');
 btn_add_membre.addEventListener('click', handleVisivility(modal_add_membre));
 btn_close_membre.addEventListener('click', handleVisivility(modal_add_membre));
 
-fetch("../../PHP/Controllers/equipe.php", {
+fetch("../Controllers/equipe.php", {
     method: "POST"
 })
     .then((response) => response.json())
@@ -394,7 +400,7 @@ const container_soutiens = document.getElementById('admin_soutiens');
 btn_add_soutien.addEventListener('click',handleVisivility(modal_add_soutien));
 btn_close_soutien.addEventListener('click',handleVisivility(modal_add_soutien));
 
-fetch("../../PHP/Controllers/soutiens.php", {
+fetch("../Controllers/soutiens.php", {
     method: "POST"
 })
     .then((response) => response.json())

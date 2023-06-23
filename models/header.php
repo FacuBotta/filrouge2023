@@ -8,7 +8,7 @@
                     <p>F</p>
                 </div>
             </div>
-            <a href="index.php"><img src="../../SRL/logo/logo.svg" alt="lien vers l'accueil" aria-label="Accueil"></a>
+            <a href="index.php"><img src="../SRL/logo/logo.svg" alt="lien vers l'accueil" aria-label="Accueil"></a>
         </div>
         <nav id="nav_menu" class="hidden_nav_menu">
             <ul>

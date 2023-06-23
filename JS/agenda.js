@@ -1,5 +1,5 @@
 // Calling data
-fetch("../../PHP/Controllers/agenda.php", {
+fetch("../Controllers/agenda.php", {
     method: "POST"
 })
 .then((response) => response.json())

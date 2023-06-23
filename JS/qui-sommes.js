@@ -1,19 +1,19 @@
 // Calling data
-fetch("../../PHP/Controllers/equipe.php", {
+fetch("../Controllers/equipe.php", {
     method: "POST",
 })
     .then((response) => response.json())
     .then((data) => {
         getDataMembres(data);
     });
-fetch("../../PHP/Controllers/soutiens.php", {
+fetch("../Controllers/soutiens.php", {
     method: "POST"
 })
     .then((response) => response.json())
     .then((data) => {
         getDataSoutien(data);
     });
-fetch("../../PHP/Controllers/description.php", {
+fetch("../Controllers/description.php", {
     method: "POST"
 })
     .then((response) => response.json())

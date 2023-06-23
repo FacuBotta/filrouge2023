@@ -23,7 +23,7 @@ if (
         $ext = substr(strrchr($_FILES['affiche_spectacle']['name'], '.'), 1);
         if (isset($_POST['titre_espectacle'])) {
             $new_fileName = str_replace(' ', '', $_POST['titre_espectacle']);
-            $affiche = "../../SRL/affiches/" . $new_fileName . ".$ext";
+            $affiche = "../SRL/affiches/" . $new_fileName . ".$ext";
             move_uploaded_file($_FILES['affiche_spectacle']['tmp_name'], $affiche);
         };
     };
@@ -58,7 +58,7 @@ if (
         for ($i = 0; $i < $count; $i++) {
             $ext = strtolower(pathinfo($_FILES['files_spectacle']['name'][$i], PATHINFO_EXTENSION));
             $new_fileName = str_replace(' ', '', $titre . '_' . ($i + 1));
-            $image = "../../SRL/spectacles/" . $new_fileName . ".$ext";
+            $image = "../SRL/spectacles/" . $new_fileName . ".$ext";
             if ($_FILES['files_spectacle']['size'][$i] <= $MAX_SIZE) {
                 move_uploaded_file($_FILES['files_spectacle']['tmp_name'][$i], $image);
                 $images[] = $image;
@@ -152,7 +152,7 @@ if (!empty($_POST['form_update'])) {
                 $ext = substr(strrchr($_FILES['new_affiche_spectacle']['name'], '.'), 1);
                 if (isset($_POST['new_titre_espectacle'])) {
                     $new_fileName = str_replace(' ', '', $_POST['new_titre_espectacle']);
-                    $new_affiche = "../../SRL/affiches/" . $new_fileName . ".$ext";
+                    $new_affiche = "../SRL/affiches/" . $new_fileName . ".$ext";
                     move_uploaded_file($_FILES['new_affiche_spectacle']['tmp_name'], $new_affiche);
                 };
             };
@@ -198,7 +198,7 @@ if (!empty($_POST['form_update'])) {
             for ($i = 0; $i < $count; $i++) {
                 $ext = strtolower(pathinfo($_FILES['new_files_spectacle']['name'][$i], PATHINFO_EXTENSION));
                 $new_fileName = str_replace(' ', '', $titre . '_' . ($i + 1));
-                $image = "../../SRL/spectacles/" . $new_fileName . ".$ext";
+                $image = "../SRL/spectacles/" . $new_fileName . ".$ext";
                 if ($_FILES['new_files_spectacle']['size'][$i] <= $MAX_SIZE) {
                     move_uploaded_file($_FILES['new_files_spectacle']['tmp_name'][$i], $image);
                     $images[] = $image;

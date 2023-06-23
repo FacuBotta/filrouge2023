@@ -1,5 +1,5 @@
 // Calling data
-fetch("../../PHP/Controllers/spectacles.php", {
+fetch("../Controllers/spectacles.php", {
     method: "POST"
 })
     .then((response) => response.json())
