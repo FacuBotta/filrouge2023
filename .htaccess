@@ -1,3 +1,2 @@
-ErrorDocument 404 /PHP/views/404.php
-ErrorDocument 401 /PHP/views/401.php
-
+ErrorDocument 404 /views/404.php
+ErrorDocument 401 /views/401.php

@@ -121,6 +121,7 @@ function getDataSpectacles(spectacles) {
         new_spectacle_card.setAttribute('tabindex', tabindex);
 
         function showSpectacleModal() {
+            window.scrollTo(0, 0);
             // The content behind the modal is hidden to prevent problems with the screen height
             btn_description_spectacle.classList.toggle("element_active");
             container_spectacle_cards.classList.toggle("hidden_element");
@@ -277,6 +278,7 @@ function getDataSpectacles(spectacles) {
                                     //Close the carousel modal.
                                     document.addEventListener('keydown', (e) => {
                                         if (e.keyCode === 27 && container_slide_modal.style.opacity == 1) {
+                                        e.preventDefault();
                                         handleModal();
                                         };
                                     });

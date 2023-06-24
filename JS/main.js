@@ -85,6 +85,8 @@ if (saved_switch_class != null) {
     switch_language.className = saved_switch_class;
     // Setting the indicator of the current lenguage
     p_switch.textContent = saved_switch_text;
+} else {
+    p_switch.textContent = 'F'
 };
 
 // Applying the correct translation function according the trigger class from 'switch_language'

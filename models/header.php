@@ -5,7 +5,7 @@
                 <p tabindex="2" aria-label="Traducir en español">E</p>
                 <p tabindex="3" aria-label="Traduire en français">F</p>
                 <div id="language_switch" class="switch fr">
-                    <p>F</p>
+                    <!-- <p>F</p> -->
                 </div>
             </div>
             <a href="index.php"><img src="../SRL/logo/logo.svg" alt="lien vers l'accueil" aria-label="Accueil"></a>
