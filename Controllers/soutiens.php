@@ -7,6 +7,7 @@ if (isset($_FILES['image_soutien']) && isset($_POST["nom_soutien"]) && isset($_P
     if (filesize($_FILES['image_soutien']['size'] > 3072000)  || !in_array(substr(strrchr($_FILES['image_soutien']['name'], '.'), 1), $extensions_ok)) {
         $_SESSION['message'] = "images error";
         header('Location: ../views/admin.php');
+        exit();
     } else {
         $ext = substr(strrchr($_FILES['image_soutien']['name'], '.'), 1);
         if (isset($_POST['nom_soutien'])) {
@@ -28,9 +29,11 @@ if (isset($_FILES['image_soutien']) && isset($_POST["nom_soutien"]) && isset($_P
         $req->execute();
         $_SESSION['message'] = "add ok";
         header('Location: ../views/admin.php');
+        exit();
     } catch (Exception $e) {
         $_SESSION['message'] = "add error";
         header('Location: ../views/admin.php');
+        exit();
         // die("Erreur:" . $e->getMessage());
     }
 }
@@ -44,6 +47,7 @@ if (!empty($_POST['form_delete'])) {
     $req->execute();
     $_SESSION['message'] = "deleted";
     header('Location: ../views/admin.php');
+    exit();
 }
 
 /* UPDATE REQUEST */
@@ -86,9 +90,11 @@ if (!empty($_POST['form_update'])) {
         $req->execute();
         $_SESSION['message'] = "update ok";
         header('Location: ../views/admin.php');
+        exit();
     } catch (Exception $e) {
         $_SESSION['message'] = "add error";
         header('Location: ../views/admin.php');
+        exit();
         // die("Erreur:" . $e->getMessage());
     }
 }

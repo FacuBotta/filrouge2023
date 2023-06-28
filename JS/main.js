@@ -1,9 +1,9 @@
 // Burguer menu
-let burguer_menu = document.getElementById('bars_menu');
-let li_nav_menu = document.querySelectorAll('nav.hidden_nav_menu li');
-let nav_menu = document.getElementById('nav_menu');
+const burguer_menu = document.getElementById('bars_menu');
+const li_nav_menu = document.querySelectorAll('nav.hidden_nav_menu li');
+const nav_menu = document.getElementById('nav_menu');
 // Function to the toogle and replace of the classes of the burguer menu
-toggleMenu = () => {
+function toggleMenu() {
     // Toogle the classe for the three lines of the symbol menu
     document.querySelector('.line1_bars_menu').classList.toggle('activeline1_bars_menu');
     document.querySelector('.line2_bars_menu').classList.toggle('activeline2_bars_menu');

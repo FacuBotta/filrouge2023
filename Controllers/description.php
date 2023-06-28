@@ -28,9 +28,11 @@ if (isset($_POST["description_esp"]) && isset($_POST["description_fr"])) {
         $req->execute();
         $_SESSION['message'] = "update ok";
         header('Location: ../views/admin.php');
+        exit();
     } catch (Exception $e) {
         $_SESSION['message'] = "add error";
         header('Location: ../views/admin.php');
+        exit();
         // die("Erreur:" . $e->getMessage());
     }
 }

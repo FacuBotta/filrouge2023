@@ -13,6 +13,7 @@ $_SESSION['last_activity'] = time();
 if (empty($_SESSION["user"])) {
     session_destroy();
     header("Location: ./connexion.php");
+    exit();
 }
 if (isset($_SESSION['message']) && $_SESSION['message'] == 'add ok') {
     echo '<script> alert("Addition réussi!"); </script>';

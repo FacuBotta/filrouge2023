@@ -19,6 +19,7 @@ if (
     ) {
         $_SESSION['message'] = "images error";
         header('Location: ../views/admin.php');
+        exit();
     } else {
         $ext = substr(strrchr($_FILES['affiche_spectacle']['name'], '.'), 1);
         if (isset($_POST['titre_espectacle'])) {
@@ -65,6 +66,7 @@ if (
             } else {
                 $_SESSION['message'] = "images error";
                 header('Location: ../views/admin.php');
+                exit();
             };
         };
     };
@@ -100,9 +102,11 @@ if (
         $req->execute();
         $_SESSION['message'] = "add ok";
         header('Location: ../views/admin.php');
+        exit();
     } catch (Exception $e) {
         $_SESSION['message'] = "add error";
         header('Location: ../views/admin.php');
+        exit();
         // die("Erreur:" . $e->getMessage());
     };
 };
@@ -124,9 +128,11 @@ if (!empty($_POST['form_delete'])) {
 
         $_SESSION['message'] = "deleted";
         header('Location: ../views/admin.php');
+        exit();
     } catch (Exception $e) {
         $_SESSION['message'] = "add error";
         header('Location: ../views/admin.php');
+        exit();
         // die("Erreur:" . $e->getMessage());
     };
 }
@@ -206,6 +212,7 @@ if (!empty($_POST['form_update'])) {
                 } else {
                     $_SESSION['message'] = "images error";
                     header('Location: ../views/admin.php');
+                    exit();
                 };
             };
         } else {
@@ -241,10 +248,12 @@ if (!empty($_POST['form_update'])) {
             $req->execute();
             $_SESSION['message'] = "update ok";
             header('Location: ../views/admin.php');
+            exit();
         } catch (Exception $e) {
-            // $_SESSION['message'] = "add error";
-            // header('Location: ../views/admin.php');
-            die("Erreur:" . $e->getMessage());
+            $_SESSION['message'] = "add error";
+            header('Location: ../views/admin.php');
+            exit();
+            // die("Erreur:" . $e->getMessage());
         };
     };
 };
