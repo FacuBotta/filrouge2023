@@ -23,10 +23,10 @@ This project served as my final exam for web developer training at school. It pr
 
 ## Some screenshots of the project
 
-![Screenshot 1]('./readmeFiles/image1.png');
-![Screenshot 2]('./readmeFiles/image2.png');
-![Screenshot 3]('./readmeFiles/image3.png');
-![Screenshot 4]('./readmeFiles/image4.png');
-![Screenshot 5]('./readmeFiles/image5.png');
-![Screenshot 6]('./readmeFiles/image6.png');
-![Screenshot 7]('./readmeFiles/image7.png');
+![Screenshot 1](./readmeFiles/image1.png)
+![Screenshot 2](./readmeFiles/image2.png)
+![Screenshot 3](./readmeFiles/image3.png)
+![Screenshot 4](./readmeFiles/image4.png)
+![Screenshot 5](./readmeFiles/image5.png)
+![Screenshot 6](./readmeFiles/image6.png)
+![Screenshot 7](./readmeFiles/image7.png)
